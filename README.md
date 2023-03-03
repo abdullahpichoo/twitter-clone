@@ -1,24 +1,15 @@
-# README
+## Making a Twitter Clone on Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Commands to Set up Live Reload
 
-Things you may want to cover:
+- gems required: gem "guard-livereload" gem "rack-livereload"
+- bundle exec guard init livereload
+- bundle exec guard
 
-* Ruby version
+# Using Rspec for Testing
 
-* System dependencies
+- Used the Shoulda-Match gem that helps in writing one liner tests
 
-* Configuration
+# User Model:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    - Has Email and Password

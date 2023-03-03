@@ -1,0 +1,56 @@
+<div class="d-flex flex-column align-items-center gap-4">
+  <h1 class = "fw-bolder">Your Profile</h1>
+  <div class="card w-40 text-center">
+    <h2 class = "card-header mb-3">Edit</h2>
+    <%# Form %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|%>
+      <div class="container ps-5 pe-5">
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%# Username %>
+        <div class="field mb-2">
+          <%= f.label :username, class: "fs-5 mb-1" %><br />
+          <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+        </div>
+        <div class="field mb-2">
+          <%= f.label :full_name, class: "fs-5 mb-1" %><br />
+          <%= f.text_field :full_name, autofocus: true, autocomplete: "full name", class: "form-control form-control-lg" %>
+        </div>
+        <%# Email %>
+        <div class="field mb-2">
+          <%= f.label :email, class: "fs-5 mb-1" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <%# New Password %>
+        <div class="field mb-2">
+          <%= f.label :password, class: "fs-5 mb-1" %> <i>(leave blank if you don't want to change it)</i><br />
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg" %>
+        </div>
+        <%# Confirm New Pasword %>
+        <div class="field mb-2">
+          <%= f.label :password_confirmation, class: "fs-5 mb-1"  %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg" %>
+        </div>
+        <%# Current Password %>
+        <div class="field mb-2">
+          <%= f.label :current_password, class: "fs-5 mb-1"  %> <br />
+          <i>(we need your current password to confirm your changes)</i>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control form-control-lg"  %>
+        </div>
+        <%# Submit %>
+        <div class="actions mt-3 mb-2">
+          <%= f.submit "Update Details", class: "btn btn-lg btn-success" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="card-footer text-muted mt-2 mb-2">
+      <div class = "mb-2" >Unhappy?</div>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-sm btn-outline-secondary" %>
+    </div>
+  </div>
+</div>
