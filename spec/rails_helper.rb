@@ -30,6 +30,12 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # This line is used to include the FactoryBot gem Syntax
+  config.include FactoryBot::Syntax::Methods
+
+  # This line is used to access the Devise Helper Methods in the testing environment
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

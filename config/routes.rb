@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   resources :tweets
+
   get 'pages/home'
+
   root 'pages#home'
+
+  get 'dashboard/index', as: 'dashboard'
 
   devise_for :users, controllers: {
     registrations: 'registrations'
   }
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
