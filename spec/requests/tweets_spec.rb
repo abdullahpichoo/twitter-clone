@@ -93,8 +93,10 @@ RSpec.describe '/tweets', type: :request do
       it 'successfully posts the tweet' do
         user = create(:user)
         sign_in user
-        post tweets_path, params: { tweet: valid_attributes }
-        expect(response).to have_http_status(:success)
+        expect do
+          post tweets_path, params: { tweet: valid_attributes }
+        end.to change { Tweet.count }.by(1)
+        expect(response).to redirect_to(dashboard_path)
       end
     end
   end

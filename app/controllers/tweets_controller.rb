@@ -22,15 +22,15 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
 
-    # respond_to do |format|
-    #   if @tweet.save
-    #     format.html { redirect_to tweet_url(@tweet), notice: 'Tweet was successfully created.' }
-    #     format.json { render :show, status: :created, location: @tweet }
-    #   else
-    #     format.html { render :new, status: :unprocessable_entity }
-    #     format.json { render json: @tweet.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    respond_to do |format|
+      if @tweet.save
+        format.html { redirect_to dashboard_path, notice: 'Tweet was successfully created.' }
+        format.json { render :show, status: :created, location: @tweet }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @tweet.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /tweets/1 or /tweets/1.json
