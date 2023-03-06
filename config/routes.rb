@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  get 'dashboard/index', as: 'dashboard'
+  get 'dashboard', to: 'dashboard#index'
 
   devise_for :users, controllers: {
     registrations: 'registrations'

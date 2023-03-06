@@ -17,7 +17,7 @@ RSpec.describe 'Dashboards', type: :request do
         sign_in user
 
         get dashboard_path
-        expect(response).to have_http_status(:redirect)
+        expect(response).to have_http_status(:success)
       end
     end
   end

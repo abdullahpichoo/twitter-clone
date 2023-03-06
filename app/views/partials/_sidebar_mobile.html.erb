@@ -1,0 +1,79 @@
+<ul class="d-flex flex-column align-items-start gap-3" style= "list-style-type:none;">
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <div class="twitter-icon fs-3">
+      <i class="bi bi-twitter"></i>
+    </div>
+  <% end %>
+  <%# Home %>
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <li class="sidebar-item fs-4">
+      <i class="bi bi-house-door"></i>
+    </li>
+  <% end %>
+  <%# Explore %>
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <li class="sidebar-item fs-4 ">
+      <i class="bi bi-hash"></i>
+    </li>
+  <% end %>
+  <%# Notifications %>
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <li class="sidebar-item fs-4 ">
+      <i class="bi bi-bell"></i>
+    </li>
+  <% end %>
+  <%# Messages %>
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <li class="sidebar-item fs-4 ">
+      <i class="bi bi-envelope"></i>
+    </li>
+  <% end %>
+  <%# Profile %>
+  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+    <li class="sidebar-item fs-4 ">
+      <i class="bi bi-person"></i>
+    </li>
+  <% end %>
+  <button type="button" class="btn btn-primary rounded-pill fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <i class="bi bi-pen"></i>
+  </button>
+</ul>
+<%# User Dropup %>
+<ul class="dropup">
+  <button type="button" class="btn btn-light rounded-pill fs-3" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-person-circle"></i>
+  </button>
+  <ul class="dropdown-menu fs-5 rounded-5 p-3">
+    <li class="dropdown-item">
+      <%= link_to "Show Profile", new_username_path, class: "nav-link"%>
+    </li>
+    <li class="dropdown-item">
+      <%= link_to "Log Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "nav-link", style: "background:none; border:none;"%>
+    </li>
+  </ul>
+</ul>
+<!-- Modal -->
+<div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content p-3">
+      <button type="button" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="d-flex flex-row justify-content-evenly gap-2">
+        <div class="pfp-placeholder">
+          <div class="sidebar-item fs-2 ">
+            <i class="bi bi-person-circle"></i>
+          </div>
+        </div>
+        <div class="w-100">
+          <%= form_with model: Tweet.new, url: tweets_path, method: :post, local: true do |form| %>
+            <div>
+              <%= form.text_area :body, placeholder: "What's Happening?", class: "form-control form-control-lg border border-light"%>
+            </div>
+            <div class = "mt-2 mb-2 text-end">
+              <%= form.submit "Tweet", class: "btn btn-lg rounded-pill btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
