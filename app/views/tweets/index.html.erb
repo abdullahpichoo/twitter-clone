@@ -1,10 +1,6 @@
+  
+<h2 class = "text-start ms-2">Home</h2>
 <%= render  "tweets/form" %>
-<div id="tweets">
-  <% Tweet.find_each do |tweet| %>
-    <%= render tweet %>
-    <p>
-      <%= link_to "Show this tweet", tweet %>
-    </p>
-  <% end %>
-</div>
-<%# <%= link_to "New tweet", new_tweet_path %>
+<section id="tweets">
+  <%= render Tweet.order(created_at: :desc)%>
+</section>

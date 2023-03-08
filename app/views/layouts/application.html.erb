@@ -9,8 +9,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body>
-    <%# <%= render 'partials/navbar' %>
-    <%= render 'partials/flash' %>
-    <%= yield %>
+    <main>
+      <%# <%= render 'partials/navbar' %>
+      <%= render 'partials/flash' %>
+      <%= yield %>
+    </main>
   </body>
 </html>

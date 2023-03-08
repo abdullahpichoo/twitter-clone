@@ -1,12 +1,52 @@
-<div id="<%= dom_id tweet %>">
-  <p>
-    <strong>Body:</strong>
-    <%= tweet.body %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
-    <%= tweet.user_id %>
-  </p>
-
-</div>
+<%= turbo_frame_tag dom_id(tweet) do %>
+  <%= link_to tweet_path(tweet.id), class: "text-black", style: "text-decoration:none;" do %>
+    <div class="tweet card border border-light-subtle border-bottom-0 rounded-0 d-flex flex-row justify-content-evenly">
+      <div class="icon fs-1 m-2">
+        <i class="bi bi-person-circle"></i>
+      </div>
+      <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
+        <%# Username Info %>
+        <div class="d-flex gap-2">
+          <div class="full-name fw-bold">
+            <%= tweet.user.username %>
+          </div>
+          <div class="username d-flex fw-light">
+            <div class="username">
+              @<%= tweet.user.username %>
+            </div>
+            <i class="bi bi-dot"></i>
+            <% if (Time.zone.now - tweet.created_at) > 1.day %>
+              <div class="created-at">
+                <%= tweet.created_at.strftime("%b %-d")%>
+              </div>
+            <% else %>
+              <div class="created-at">
+                <%= time_ago_in_words(tweet.created_at) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <%# tweet Body %>
+        <div class="body">
+          <%= tweet.body %>
+        </div>
+        <div class="likes-and-comments d-flex gap-3">
+          <%# Likes %>
+          <div class="likes d-flex align-items-center gap-2">
+            <i class="bi bi-heart"></i>
+            <div class="count fw-lighter">
+              5
+            </div>
+          </div>
+          <%# Comments %>
+          <div class="comments d-flex align-items-center gap-2">
+            <i class="bi bi-chat"></i>
+            <div class="count fw-lighter">
+              5
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

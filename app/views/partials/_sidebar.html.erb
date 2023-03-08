@@ -86,24 +86,8 @@
 <div class="modal" id="regular-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content p-3">
-      <button type="button" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
-      <div class="d-flex flex-row justify-content-evenly gap-2">
-        <div class="pfp-placeholder">
-          <div class="sidebar-item fs-2 ">
-            <i class="bi bi-person-circle"></i>
-          </div>
-        </div>
-        <div class="w-100">
-          <%= form_with model: Tweet.new, url: tweets_path, method: :post, local: true do |form| %>
-            <div>
-              <%= form.text_area :body, placeholder: "What's Happening?", class: "form-control form-control-lg border border-light"%>
-            </div>
-            <div class = "mt-2 mb-2 text-end">
-              <%= form.submit "Tweet", class: "btn btn-lg rounded-pill btn-primary" %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+      <button type="button" id = "regular-modal-close-btn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
+      <%= render partial: "tweets/form" %>
     </div>
   </div>
 </div>
