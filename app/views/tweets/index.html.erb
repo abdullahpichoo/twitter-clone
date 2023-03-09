@@ -1,5 +1,4 @@
-  
-<h2 class = "text-start ms-2">Home</h2>
+<h2 class = "w-100 d-flex text-start card border border-light-subtle border-top-0 rounded-0 mb-0">Home</h2>
 <%= render  "tweets/form" %>
 <section id="tweets">
   <%= render Tweet.order(created_at: :desc)%>

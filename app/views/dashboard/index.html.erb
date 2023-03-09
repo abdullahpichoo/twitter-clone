@@ -21,17 +21,17 @@
       }
     }
 </style>
-<div class="container-fluid text-center">
-  <div class="row">
+<div class="container-lg text-center">
+  <div class="row justify-content-center">
     <div class="col col-sm-auto mobile-sidebar" >
       <%= render 'partials/sidebar_mobile' %>
     </div>
     <div class="col col-sm-auto regular-sidebar" >
       <%= render 'partials/sidebar' %>
     </div>
-    <div class="col col-lg">
+    <section class="col col-lg-7">
       <%= render template: "tweets/index" %>
-    </div>
+    </section>
     <div class="col col-sm-auto third-column">
       Third Col
     </div>
