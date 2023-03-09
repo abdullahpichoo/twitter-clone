@@ -1,10 +1,10 @@
-<div class="card border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+<%= content_tag(:div, "",class:"card border border-light-subtle border-bottom-0 border-top-0 rounded-0", data:{controller: "tweet-form"}) do %>
   <div class="d-flex flex-row justify-content-evenly">
     <div class="icon fs-1 m-2">
       <i class="bi bi-person-circle"></i>
     </div>
     <div class="w-100 m-2">
-      <%= form_with model: Tweet.new, url: tweets_path, method: :post, data: { controller: 'tweet-form' } do |form| %>
+      <%= form_with model: Tweet.new, url: tweets_path, method: :post do |form| %>
         <div>
           <%= form.text_area :body, placeholder: "What's Happening?", class: "form-control form-control-lg border border-light"%>
         </div>
@@ -14,4 +14,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>

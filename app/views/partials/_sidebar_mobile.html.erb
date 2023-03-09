@@ -34,7 +34,8 @@
       <i class="bi bi-person"></i>
     </li>
   <% end %>
-  <button type="button" class="btn btn-primary rounded-pill fs-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <%# Tweet Button %>
+  <button type="button" class="btn btn-primary rounded-pill fs-4" data-bs-toggle="modal" data-bs-target="#smallScreenModal">
     <i class="bi bi-pen"></i>
   </button>
 </ul>
@@ -53,10 +54,10 @@
   </ul>
 </ul>
 <!-- Modal -->
-<div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal " id="smallScreenModal" tabindex="-1" aria-labelledby="smallScreenModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content p-3">
-      <button type="button" id = "modal-close-btn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" id = "smallScreenModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
       <%= render partial: "tweets/form" %>
     </div>
   </div>

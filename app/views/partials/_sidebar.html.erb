@@ -59,7 +59,7 @@
       </span>
     </li>
   <% end %>
-  <button type="button" class="btn btn-lg w-100 btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#regular-modal">
+  <button type="button" class="btn btn-lg w-100 btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#regularScreenModal">
     Tweet
   </button>
 </ul>
@@ -83,10 +83,10 @@
   </ul>
 </ul>
 <!-- Modal -->
-<div class="modal" id="regular-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="regularScreenModal" tabindex="-1" aria-labelledby="regularScreenModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content p-3">
-      <button type="button" id = "regular-modal-close-btn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" id = "regularScreenModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
       <%= render partial: "tweets/form" %>
     </div>
   </div>
