@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_many :tweets, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_tweets, through: :likes, source: :tweet
+
   has_one_attached :profile_picture
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 

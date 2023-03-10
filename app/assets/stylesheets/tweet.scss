@@ -8,3 +8,47 @@
     background-color: $gray-200;
   }
 }
+:root {
+  --light-blue: #0188ba;
+  --light-blue-hover: #b1eefb;
+
+  --green: #00ab08;
+  --green-hover: #8fd793;
+}
+
+.retweet-icon,
+.views-icon,
+.comment-icon,
+.like-count {
+  color: #202020;
+  transition: all 0.2s ease;
+}
+.retweet-icon:hover,
+.views-icon:hover,
+.comment-icon:hover {
+  color: $blue-400;
+  background-color: $blue-100;
+  transition: all 0.2s ease;
+}
+.retweet-icon:hover + .retweet-count {
+  color: $blue-400;
+  transition: all 0.2s ease;
+}
+.views-icon:hover + .views-count {
+  color: $blue-400;
+  transition: all 0.2s ease;
+}
+.comment-icon:hover + .comment-count {
+  color: $blue-400;
+  transition: all 0.2s ease;
+}
+
+.like-icon:hover {
+  color: $pink-400;
+  background-color: $pink-100;
+  transition: all 0.2s ease;
+}
+.like-icon:hover + .like-count {
+  color: $pink-400;
+  transition: all 0.2s ease;
+}

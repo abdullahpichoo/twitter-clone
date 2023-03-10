@@ -1,14 +1,14 @@
-<%= turbo_frame_tag dom_id(tweet) do %>
-  <%= link_to tweet_path(tweet.id), class: "text-black", style: "text-decoration:none;" do %>
+  <%= turbo_frame_tag dom_id(tweet) do %>
+  <%# <%= link_to tweet_path(tweet.id), class: "text-black", style: "text-decoration:none;" do %>
     <div class="tweet card border border-light-subtle border-bottom-0 rounded-0 d-flex flex-row justify-content-evenly">
       <div class="icon fs-1 m-2">
-        <% if current_user.profile_picture.attached? %>
-          <%= image_tag(current_user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
+        <% if tweet.user.profile_picture.attached? %>
+          <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
         <% else %>
           <i class="bi bi-person-circle"></i>
         <% end %>
       </div>
-      <div class="w-100 m-2  d-flex flex-column align-items-start gap-1">
+      <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
         <%# Username Info %>
         <div class="d-flex gap-2">
           <div class="full-name fw-bold">
@@ -25,26 +25,73 @@
           </div>
         </div>
         <%# tweet Body %>
-        <div class="body">
+        <p class="body">
           <%= tweet.body %>
-        </div>
-        <div class="likes-and-comments d-flex gap-3">
-          <%# Likes %>
-          <div class="likes d-flex align-items-center gap-2">
-            <i class="bi bi-heart"></i>
-            <div class="count fw-lighter">
+        </p>
+        <div class="likes-and-comments w-100 d-flex justify-content-between">
+          <%# Comments %>
+          <%= link_to dashboard_path, class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+            <div class="comment-icon  px-2 py-1 rounded-circle">
+              <i class="bi bi-chat"></i>
+            </div>
+            <div class="comment-count fw-lighter">
+              5
+            </div>
+          <% end %>
+          <%# Retweet %>
+          <div class = "retweet d-flex align-items-center gap-1">
+            <div class="retweet-icon px-2 py-1 rounded-circle" >
+              <i class="bi bi-arrow-left-right"></i>
+            </div>
+            <div class="retweet-count fw-lighter">
               5
             </div>
           </div>
-          <%# Comments %>
-          <div class="comments d-flex align-items-center gap-2">
-            <i class="bi bi-chat"></i>
-            <div class="count fw-lighter">
+          <%# Likes %>
+          <% if tweet.likes.include?(current_user.likes.find_by(tweet: tweet)) %>
+            <%= link_to tweet_like_path(tweet, tweet.likes.find_by(user: current_user)), data: {"turbo-method": "delete"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+              <div class="like-icon px-2 py-1 rounded-circle">
+                <i class="bi bi-heart-fill" style= "color: #de5c9d"></i>
+              </div>
+              <div class="like-count fw-lighter">
+                <%= tweet.likes.size %>
+              </div>
+            <% end %>
+          <% else %>
+            <%= link_to tweet_likes_path(tweet), data: {"turbo-method": "post"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+              <div class="like-icon px-2 py-1 rounded-circle">
+                <i class="bi bi-heart"></i>
+              </div>
+              <div class="like-count fw-lighter">
+                <%= tweet.likes.size %>
+              </div>
+            <% end %>
+          <% end %>
+          <% if false %>
+            <%= link_to tweet_likes_path(tweet), data: {"turbo-method": "post"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+              <div class="like-icon px-2 py-1 rounded-circle">
+                <% if tweet.likes.include?(current_user.likes.find_by(tweet: tweet)) %>
+                  <i class="bi bi-heart-fill" style= "color: #de5c9d"></i>
+                <% else %>
+                  <i class="bi bi-heart"></i>
+                <% end %>
+              </div>
+              <div class="like-count fw-lighter">
+                <%= tweet.likes.size %>
+              </div>
+            <% end %>
+          <% end %>
+          <%# Views %>
+          <div class = "d-flex align-items-center gap-1" >
+            <div class="views-icon px-2 py-1 rounded-circle">
+              <i class="bi bi-bar-chart-line"></i>
+            </div>
+            <div class="views-count fw-lighter">
               5
             </div>
           </div>
         </div>
       </div>
     </div>
+    <%# <% end %>
   <% end %>
-<% end %>

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :tweets
+  # get 'likes/create'
+  # get 'likes/destroy'
+
+  resources :tweets do
+    resources :likes, only: %i[create destroy]
+  end
 
   get 'pages/home'
 

@@ -7,7 +7,7 @@
         <i class="bi bi-person-circle"></i>
       <% end %>
     </div>
-    <div class="w-100 m-2 mt-0">
+    <div class="w-100 m-2">
       <%= form_with model: Tweet.new, url: tweets_path, method: :post, data:{controller: "tweet-form"} do |form| %>
         <div>
           <%= form.text_area :body, placeholder: "What's Happening?", class: "form-control form-control-lg border border-light"%>
