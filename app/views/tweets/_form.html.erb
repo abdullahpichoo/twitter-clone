@@ -1,7 +1,11 @@
 <div class = "card border border-light-subtle border-bottom-0 border-top-0 rounded-0">
   <div class="d-flex flex-row justify-content-evenly">
     <div class="icon fs-1 m-2">
-      <i class="bi bi-person-circle"></i>
+      <% if current_user.profile_picture.attached? %>
+        <%= image_tag(current_user.profile_thumbnail, size: "80x80" , class: "rounded-circle") %>
+      <% else %>
+        <i class="bi bi-person-circle"></i>
+      <% end %>
     </div>
     <div class="w-100 m-2 mt-0">
       <%= form_with model: Tweet.new, url: tweets_path, method: :post, data:{controller: "tweet-form"} do |form| %>

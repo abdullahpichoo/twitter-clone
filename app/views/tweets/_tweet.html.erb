@@ -2,9 +2,13 @@
   <%= link_to tweet_path(tweet.id), class: "text-black", style: "text-decoration:none;" do %>
     <div class="tweet card border border-light-subtle border-bottom-0 rounded-0 d-flex flex-row justify-content-evenly">
       <div class="icon fs-1 m-2">
-        <i class="bi bi-person-circle"></i>
+        <% if current_user.profile_picture.attached? %>
+          <%= image_tag(current_user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
+        <% else %>
+          <i class="bi bi-person-circle"></i>
+        <% end %>
       </div>
-      <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
+      <div class="w-100 m-2  d-flex flex-column align-items-start gap-1">
         <%# Username Info %>
         <div class="d-flex gap-2">
           <div class="full-name fw-bold">
@@ -15,15 +19,9 @@
               @<%= tweet.user.username %>
             </div>
             <i class="bi bi-dot"></i>
-            <% if (Time.zone.now - tweet.created_at) > 1.day %>
-              <div class="created-at">
-                <%= tweet.created_at.strftime("%b %-d")%>
-              </div>
-            <% else %>
-              <div class="created-at">
-                <%= time_ago_in_words(tweet.created_at) %>
-              </div>
-            <% end %>
+            <div class="created-at">
+              <%= posted_at(tweet) %>
+            </div>
           </div>
         </div>
         <%# tweet Body %>

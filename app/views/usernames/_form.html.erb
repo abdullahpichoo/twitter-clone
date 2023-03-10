@@ -10,9 +10,14 @@
       <%= f.label :display_name, class: "fs-5 mb-1" %><br />
       <%= f.text_field :display_name, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
     </div>
+    <%# Profile Picture %>
+    <%= f.label :profile_picture, class: "fs-5 mb-1" %><br />
+    <div class="input-group mb-2">
+      <%= f.file_field :profile_picture, class: "form-control form-control-lg" %>
+    </div>
     <%# Submit %>
-    <div class="actions mt-3 mb-2">
-      <%= f.submit "Set Username", class: "btn btn-lg btn-success" %>
+    <div class="actions mt-4 mb-4">
+      <%= f.submit "Proceed", class: "btn btn-lg btn-primary w-100" %>
     </div>
   </div>
 <% end %>
