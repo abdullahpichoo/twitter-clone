@@ -36,3 +36,11 @@ Aggregation:
 
 Introduce a new column 'Likes_count' in the tweet model and do counter caching.
 Counter Cache removes the need for querying the likes count every time a tweet is listed, Rails manages it itself and the likes count is stored in the database regardless.
+
+### Problem (24-3-2023)
+
+When querying all the tweets it hits the databases as many times as there are tweets which is very inefficient
+
+### Fix
+
+There's something called eager loading. In eager loading, Rails will preload the content of the database along with their associations and joins and this is will result in significantly less hits to the database
