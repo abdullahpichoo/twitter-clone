@@ -51,6 +51,8 @@ module TweetsHelper
   # If false -> User has NOT liked this tweet
   # This function uses memoization to save query processing every time a tweet is listed
   def current_user_liked_this_tweet(current_user, tweet)
+    return unless tweet.likes_count.positive?
+
     @current_user_liked_this_tweet ||= tweet.liked_users.include?(current_user)
   end
 

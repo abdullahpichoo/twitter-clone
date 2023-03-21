@@ -21,34 +21,34 @@
 .comment-icon,
 .like-count {
   color: #202020;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .retweet-icon:hover,
 .views-icon:hover,
 .comment-icon:hover {
   color: $blue-400;
   background-color: $blue-100;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .retweet-icon:hover + .retweet-count {
   color: $blue-400;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .views-icon:hover + .views-count {
   color: $blue-400;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .comment-icon:hover + .comment-count {
   color: $blue-400;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .like-icon:hover {
   color: $pink-400;
   background-color: $pink-100;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 .like-icon:hover + .like-count {
   color: $pink-400;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }

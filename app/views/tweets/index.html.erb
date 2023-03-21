@@ -2,7 +2,5 @@
 <%= render  "tweets/form" %>
 <section id="tweets">
   <%# <%= render Tweet.order(created_at: :desc)%>
-  <%= @all_tweets.map do |t| %>
-    <%= render t %>
-  <% end %>
+  <%= render @all_tweets %>
 </section>
