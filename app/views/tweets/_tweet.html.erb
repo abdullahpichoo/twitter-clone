@@ -48,7 +48,9 @@
             </div>
           </div>
           <%# Likes %>
+          <%# This if means whether the current user exists in the list of users that liked this tweet %>
           <% if tweet.likes.include?(current_user.likes.find_by(tweet: tweet)) %>
+            <%# Unlike the tweet if already liked by current user %>
             <%= link_to tweet_like_path(tweet, tweet.likes.find_by(user: current_user)), data: {"turbo-method": "delete"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
               <div class="like-icon px-2 py-1 rounded-circle">
                 <i class="bi bi-heart-fill" style= "color: #de5c9d"></i>
@@ -58,23 +60,11 @@
               </div>
             <% end %>
           <% else %>
+            <%# tweet.likes returns the list of like objects for the tweet %>
+            <%# .find_by(user: current_user) filters the result to get only the objects whose user_id == current_user id %>
             <%= link_to tweet_likes_path(tweet), data: {"turbo-method": "post"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
               <div class="like-icon px-2 py-1 rounded-circle">
                 <i class="bi bi-heart"></i>
-              </div>
-              <div class="like-count fw-lighter">
-                <%= tweet.likes.size %>
-              </div>
-            <% end %>
-          <% end %>
-          <% if false %>
-            <%= link_to tweet_likes_path(tweet), data: {"turbo-method": "post"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
-              <div class="like-icon px-2 py-1 rounded-circle">
-                <% if tweet.likes.include?(current_user.likes.find_by(tweet: tweet)) %>
-                  <i class="bi bi-heart-fill" style= "color: #de5c9d"></i>
-                <% else %>
-                  <i class="bi bi-heart"></i>
-                <% end %>
               </div>
               <div class="like-count fw-lighter">
                 <%= tweet.likes.size %>

@@ -6,6 +6,7 @@ class LikesController < ApplicationController
     @like = current_user.likes.create(tweet: @tweet)
 
     respond_to do |format|
+      format.html { redirect_to dashboard_path }
       format.turbo_stream
     end
   end
@@ -15,6 +16,7 @@ class LikesController < ApplicationController
     @like.destroy
 
     respond_to do |format|
+      format.html { redirect_to dashboard_path }
       format.turbo_stream
     end
   end

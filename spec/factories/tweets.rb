@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :tweet do
-    body { "MyString" }
-    user { nil }
+    body { 'MyString' }
+    user
   end
 end
