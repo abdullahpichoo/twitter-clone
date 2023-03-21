@@ -5,9 +5,10 @@ class Like < ApplicationRecord
   # If I do @tweet.likes -> It will return all the rows where Tweet ID == @tweet.id
   # These returned rows will also have User IDs that we can use
   # We can check the returned result for any User ID of your choice by doing this
-  # @tweet.likes.include?(user.likes.find_by(tweet: @tweet)) 
+  # @tweet.likes.include?(user.likes.find_by(tweet: @tweet))
 
-  belongs_to :tweet
+  # For counter caching, write the name of the column in the parent table that you want to counter cache
+  belongs_to :tweet, counter_cache: :likes_count
   belongs_to :user
 
   validates :user_id, uniqueness: { scope: :tweet_id }

@@ -21,3 +21,18 @@ FactoryBot is a gem that is the replacement for fixtures and provides easy synta
 # User Model:
 
     - Has Email and Password
+
+# What am I working on right now?
+
+### Problem (21-3-2023)
+
+I added the like feature to the tweet model but the problem with it right now is that every time a tweet is listed, there are queries are need to be run which include joins and aggregations. Here what the problem is:
+Joins:
+'''<%= link_to tweet_like_path(tweet, tweet.likes.find_by(user: current_user)), data: {"turbo-method": "delete"}, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>'''
+Aggregation:
+<%= tweet.likes.size %>
+
+### Fix
+
+Introduce a new column 'Likes_count' in the tweet model and do counter caching.
+Counter Cache removes the need for querying the likes count every time a tweet is listed, Rails manages it itself and the likes count is stored in the database regardless.

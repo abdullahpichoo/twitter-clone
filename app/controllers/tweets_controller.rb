@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all
+    @all_tweets = Tweet.includes(:liked_users, :user).order(created_at: :desc)
     @tweet = Tweet.new
   end
 
