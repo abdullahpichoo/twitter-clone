@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  # get 'likes/create'
-  # get 'likes/destroy'
-
   resources :tweets do
     resources :likes, only: %i[create destroy]
+    resources :retweets, only: %i[create destroy]
   end
 
   get 'pages/home'
 
-  root 'pages#home'
+  root 'dashborad#index'
 
   get 'dashboard', to: 'dashboard#index'
 

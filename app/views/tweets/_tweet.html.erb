@@ -39,20 +39,20 @@
             </div>
           <% end %>
           <%# Retweet %>
-          <div class = "retweet d-flex align-items-center gap-1">
-            <div class="retweet-icon px-2 py-1 rounded-circle" >
-              <i class="bi bi-arrow-left-right"></i>
+          <%= link_to get_tweet_retweet_path(current_user, tweet), data: {"turbo-method": get_retweeted_tweet_data_method(current_user, tweet) }, class: "retweets d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+            <div class="retweet-icon px-2 py-1 rounded-circle">
+              <i class = "bi bi-arrow-left-right" style = "<%=get_retweet_icon_style(current_user, tweet)%>" ></i>
             </div>
-            <div class="retweet-count fw-lighter">
-              5
+            <div class="retweet-count fw-lighter"  style = "<%=get_retweet_icon_style(current_user, tweet)%>" >
+              <%= tweet.retweets_count %>
             </div>
-          </div>
+          <% end %>
           <%# Likes %>
-          <%= link_to get_tweet_like_path(current_user, tweet), data: {"turbo-method": get_data_method(current_user, tweet) }, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+          <%= link_to get_tweet_like_path(current_user, tweet), data: {"turbo-method": get_liked_tweet_data_method(current_user, tweet) }, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
             <div class="like-icon px-2 py-1 rounded-circle">
               <i class = "<%=get_heart_type(current_user, tweet)%>" style = "<%=get_heart_style(current_user, tweet)%>" ></i>
             </div>
-            <div class="like-count fw-lighter">
+            <div class="like-count fw-lighter" style = "<%=get_heart_style(current_user, tweet)%>" >
               <%= tweet.likes_count %>
             </div>
           <% end %>

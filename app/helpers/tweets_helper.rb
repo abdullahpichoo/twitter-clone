@@ -10,6 +10,7 @@ module TweetsHelper
     end
   end
 
+  # For Liked Tweets ------------------------------------------
   # Returns the route path for liking a tweet (create,destroy)
   def get_tweet_like_path(current_user, tweet)
     if current_user_liked_this_tweet?(current_user, tweet)
@@ -20,7 +21,7 @@ module TweetsHelper
   end
 
   # Returns whether html method is going to be POST or DELETE
-  def get_data_method(current_user, tweet)
+  def get_liked_tweet_data_method(current_user, tweet)
     if current_user_liked_this_tweet?(current_user, tweet)
       'delete'
     else
@@ -45,6 +46,37 @@ module TweetsHelper
       ''
     end
   end
+  # For Liked Tweets ------------------------------------------
+
+  #--------------------------------------------------------------
+
+  # For Retweeted Tweets --------------------------------------
+  def get_tweet_retweet_path(current_user, tweet)
+    if current_user_retweeted_this_tweet?(current_user, tweet)
+      tweet_retweet_path(tweet, tweet.retweets.find_by(user: current_user))
+    else
+      tweet_retweets_path(tweet)
+    end
+  end
+
+  # Returns whether html method is going to be POST or DELETE
+  def get_retweeted_tweet_data_method(current_user, tweet)
+    if current_user_retweeted_this_tweet?(current_user, tweet)
+      'delete'
+    else
+      'post'
+    end
+  end
+
+  # Returns the color of the heart based on condition of tweet like
+  def get_retweet_icon_style(current_user, tweet)
+    if current_user_retweeted_this_tweet?(current_user, tweet)
+      'color: #198754'
+    else
+      ''
+    end
+  end
+  # For Retweeted Tweets --------------------------------------
 
   # This function queries the tweets liked by the current user and checks if the passed tweet is on of them:
   # If true -> User has liked this tweet
@@ -57,4 +89,13 @@ module TweetsHelper
   end
 
   alias current_user_liked_this_tweet? current_user_liked_this_tweet
+
+  # For Retweets -> Checking if the signed in user retweeted this
+  def current_user_retweeted_this_tweet(current_user, tweet)
+    return unless tweet.retweets_count.positive?
+
+    @current_user_retweeted_this_tweet ||= tweet.retweeted_users.include?(current_user)
+  end
+
+  alias current_user_retweeted_this_tweet? current_user_retweeted_this_tweet
 end

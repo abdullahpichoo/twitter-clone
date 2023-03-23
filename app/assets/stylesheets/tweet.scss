@@ -23,17 +23,24 @@
   color: #202020;
   transition: all 0.3s ease;
 }
-.retweet-icon:hover,
+
 .views-icon:hover,
 .comment-icon:hover {
   color: $blue-400;
   background-color: $blue-100;
   transition: all 0.3s ease;
 }
-.retweet-icon:hover + .retweet-count {
-  color: $blue-400;
+
+.retweet-icon:hover {
+  color: $green-500;
+  background-color: $green-100;
   transition: all 0.3s ease;
 }
+.retweet-icon:hover + .retweet-count {
+  color: $green-500;
+  transition: all 0.3s ease;
+}
+
 .views-icon:hover + .views-count {
   color: $blue-400;
   transition: all 0.3s ease;

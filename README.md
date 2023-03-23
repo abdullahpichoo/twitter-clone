@@ -32,7 +32,7 @@ Joins:
 Aggregation:
 <%= tweet.likes.size %>
 
-### Fix
+#### Fix
 
 Introduce a new column 'Likes_count' in the tweet model and do counter caching.
 Counter Cache removes the need for querying the likes count every time a tweet is listed, Rails manages it itself and the likes count is stored in the database regardless.
@@ -41,6 +41,18 @@ Counter Cache removes the need for querying the likes count every time a tweet i
 
 When querying all the tweets it hits the databases as many times as there are tweets which is very inefficient
 
-### Fix
+#### Fix
 
 There's something called eager loading. In eager loading, Rails will preload the content of the database along with their associations and joins and this is will result in significantly less hits to the database
+
+### Implementing Retweets same as the Likes
+
+done. Making a retweet table with references to user and tweets
+done. Adding a retweet_count as attribute
+done. Writing associations in model
+done. Writing model specs
+done. Adding Routes
+done. Writing controller
+done. Adding methods in tweet_helper method
+done. Updating the views
+done. Writing request specs
