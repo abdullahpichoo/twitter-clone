@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :tweets do
+  resources :tweets, only: %i[index show create] do
     resources :likes, only: %i[create destroy]
     resources :retweets, only: %i[create destroy]
   end

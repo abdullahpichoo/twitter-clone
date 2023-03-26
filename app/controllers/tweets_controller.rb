@@ -1,21 +1,13 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: %i[show edit update destroy]
   before_action :authenticate_user!
-  # GET /tweets or /tweets.json
+
   def index
-    @all_tweets ||= Tweet.includes(:liked_users, :user).order(created_at: :desc)
-    @tweet = Tweet.new
+    @all_tweets = Tweet.includes(:liked_users, :retweeted_users, :user).order(created_at: :desc)
   end
 
-  # GET /tweets/1 or /tweets/1.json
   def show; end
 
-  # GET /tweets/new
-  def new
-    @tweet = Tweet.new
-  end
-
-  # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
 
@@ -23,21 +15,7 @@ class TweetsController < ApplicationController
       if @tweet.save
         format.html { redirect_to dashboard_path, notice: 'Tweet was successfully created.' }
         format.turbo_stream # This line calls the create.turbo_stream.erb file
-        # format.json { render :show, status: :created, location: @tweet }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @tweet.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /tweets/1 or /tweets/1.json
-  def destroy
-    @tweet.destroy
-
-    respond_to do |format|
-      format.html { redirect_to tweets_url, notice: 'Tweet was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

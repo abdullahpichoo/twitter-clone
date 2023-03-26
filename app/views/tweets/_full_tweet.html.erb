@@ -1,0 +1,71 @@
+<div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+  <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+    <i class="bi bi-arrow-left"></i>
+  <% end %>
+  <h4>Tweet</h4>
+</div>
+<div class="tweet-details card text-start border border-light-subtle border-top-0 rounded-0 p-3">
+  <%# Profile Picture and Username %>
+  <div class="d-flex gap-2 align-items-center mb-3">
+    <div class="pfp fs-1 me-2">
+      <% if @tweet.user.profile_picture.attached? %>
+        <%= image_tag(@tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
+      <% else %>
+        <i class="bi bi-person-circle"></i>
+      <% end %>
+    </div>
+    <div class="d-flex flex-column">
+      <div class="full-name fw-bold">
+        <%= @tweet.user.display_name %>
+      </div>
+      <div class="username d-flex fw-light">
+        <div class="username">
+          @<%= @tweet.user.username %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# @tweet Body %>
+  <p class="ms-1 body">
+    <%= @tweet.body %>
+  </p>
+  <%# Posted time %>
+  <div class="created-at fw-light">
+    <%= posted_at_time(@tweet) %>
+    <i class="bi bi-dot"></i>
+    <%= posted_at_date(@tweet) %>
+    <i class="bi bi-dot"></i>
+    <span><b class= "fw-bold">144</b> Views</span>
+  </div>
+</div>
+<%# Interaction Details %>
+<div class="d-flex gap-3 text-start border border-light-subtle border-top-0 rounded-0 p-3">
+  <div class = "fw-light" >
+    <b class= "fw-bold"> <%= @tweet.retweets_count %></b> Retweets
+  </div>
+  <div class = "fw-light"><b class= "fw-bold"> <%= @tweet.likes_count %> </b> Likes
+  </div>
+</div>
+<%# Action Links %>
+<div class="d-flex justify-content-evenly gap-3 text-start border border-light-subtle border-top-0 rounded-0 p-2">
+  <%# Comments %>
+  <%= link_to tweet_path(@tweet), class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+    <div class="comment-icon  px-2 py-1 rounded-circle">
+      <i class="bi bi-chat"></i>
+    </div>
+  <% end %>
+  <%# Retweet %>
+  <%= link_to get_tweet_retweet_path(current_user, @tweet), data: {"turbo-method": get_retweeted_tweet_data_method(current_user, @tweet) }, class: "retweets d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+    <div class="retweet-icon px-2 py-1 rounded-circle">
+      <i class = "bi bi-arrow-left-right" style = "<%=get_retweet_icon_style(current_user, @tweet)%>" ></i>
+    </div>
+    <div class="retweet-count fw-lighter"  style = "<%=get_retweet_icon_style(current_user, @tweet)%>" >
+    </div>
+  <% end %>
+  <%# Likes %>
+  <%= link_to get_tweet_like_path(current_user, @tweet), data: {"turbo-method": get_liked_tweet_data_method(current_user, @tweet) }, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+    <div class="like-icon px-2 py-1 rounded-circle">
+      <i class = "<%=get_heart_type(current_user, @tweet)%>" style = "<%=get_heart_style(current_user, @tweet)%>" ></i>
+    </div>
+  <% end %>
+</div>

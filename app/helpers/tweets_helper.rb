@@ -10,6 +10,14 @@ module TweetsHelper
     end
   end
 
+  def posted_at_time(tweet)
+    tweet.created_at.strftime('%l:%M %p')
+  end
+
+  def posted_at_date(tweet)
+    tweet.created_at.strftime('%b %e, %Y')
+  end
+
   # For Liked Tweets ------------------------------------------
   # Returns the route path for liking a tweet (create,destroy)
   def get_tweet_like_path(current_user, tweet)

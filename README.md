@@ -56,3 +56,5 @@ done. Writing controller
 done. Adding methods in tweet_helper method
 done. Updating the views
 done. Writing request specs
+
+### Building Tweet Show Page
