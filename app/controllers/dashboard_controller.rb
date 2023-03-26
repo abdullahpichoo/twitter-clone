@@ -3,5 +3,6 @@ class DashboardController < ApplicationController
 
   def index
     @all_tweets = Tweet.includes(:liked_users, :retweeted_users, :user).order(created_at: :desc)
+    # redirect_to tweets_path
   end
 end

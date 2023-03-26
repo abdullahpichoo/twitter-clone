@@ -4,9 +4,12 @@ class TweetsController < ApplicationController
 
   def index
     @all_tweets = Tweet.includes(:liked_users, :retweeted_users, :user).order(created_at: :desc)
+    redirect_to dashboard_path
   end
 
-  def show; end
+  def show
+    @full_tweet = @tweet
+  end
 
   def create
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
