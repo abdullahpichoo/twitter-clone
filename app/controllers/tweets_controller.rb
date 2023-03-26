@@ -8,6 +8,8 @@ class TweetsController < ApplicationController
   end
 
   def show
+    create_view unless View.exists?(user: current_user, tweet: @tweet)
+
     @full_tweet = @tweet
   end
 
@@ -26,7 +28,11 @@ class TweetsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_tweet
-    @tweet = Tweet.find(params[:id])
+    @tweet ||= Tweet.find(params[:id])
+  end
+
+  def create_view
+    View.create(tweet: @tweet, user: current_user)
   end
 
   # Only allow a list of trusted parameters through.

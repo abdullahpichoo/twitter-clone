@@ -7,7 +7,7 @@ class UsernamesController < ApplicationController
 
   def update
     if username_params[:username].present? && current_user.update(username_params)
-      redirect_to dashboard_path, notice: 'Username was successfully updated!'
+      redirect_to dashboard_path, notice: 'Profile was successfully updated!'
     else
       flash[:alert] = if username_params[:username].blank?
                         'Username cannot be empty!'

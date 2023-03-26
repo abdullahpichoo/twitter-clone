@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(tweet) do %>
-  <div data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" class="tweet card border border-light-subtle border-bottom-0 rounded-0 d-flex flex-row justify-content-evenly">
+  <div data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" class="tweet card border border-light-subtle border-top-0 rounded-0 d-flex flex-row justify-content-evenly">
     <div class="icon fs-1 m-2">
       <% if tweet.user.profile_picture.attached? %>
         <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
@@ -56,12 +56,12 @@
           </div>
         <% end %>
         <%# Views %>
-        <%= link_to dashboard_path, data: {"ignore-click": true}, class: "views d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+        <%= link_to dashboard_path, data: {"ignore-click": true}, class: "views d-flex align-items-center gap-1 text-black text-decoration-none me-4" do %>
           <div class="views-icon px-2 py-1 rounded-circle">
             <i class="bi bi-bar-chart-line"></i>
           </div>
           <div class="views-count fw-lighter">
-            5
+            <%= tweet.views_count %>
           </div>
         <% end %>
       </div>

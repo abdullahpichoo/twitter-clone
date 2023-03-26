@@ -58,3 +58,7 @@ done. Updating the views
 done. Writing request specs
 
 ### Building Tweet Show Page
+
+Built the Tweet Show Page, ran into some problems. I can't really remember what were the problems but I fixed them somehow. Added the turbo functionality to the Tweet Show Page.
+
+### View Count on Tweets

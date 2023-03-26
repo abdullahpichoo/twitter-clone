@@ -20,19 +20,27 @@ RSpec.describe '/tweets', type: :request do
     { body: 'this is a tweet' }
   end
 
+  let(:user) { create(:user) }
+  let(:tweet) { create(:tweet) }
+  before { sign_in user }
+
   let(:invalid_attributes) do
     skip('Add a hash of attributes invalid for your model')
   end
 
   describe 'GET /show' do
     it 'successfully shows the tweet page' do
-      user = create(:user)
-      sign_in user
-
-      tweet = create(:tweet)
-
       get tweet_path(tweet)
       expect(response).to have_http_status(:success)
+    end
+
+    it 'increases the View Count if the tweet has not been viewed' do
+      expect { get tweet_path(tweet) }.to change { View.count }.by(1)
+    end
+
+    it 'does not increase the View Count if the tweet has already been viewed' do
+      create(:view, user:, tweet:)
+      expect { get tweet_path(tweet) }.not_to change { View.count }
     end
   end
 
