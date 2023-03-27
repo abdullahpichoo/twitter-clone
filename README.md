@@ -62,3 +62,11 @@ done. Writing request specs
 Built the Tweet Show Page, ran into some problems. I can't really remember what were the problems but I fixed them somehow. Added the turbo functionality to the Tweet Show Page.
 
 ### View Count on Tweets
+
+Same way I did the Likes and Retweet thing.
+
+### Reply Tweet
+
+This bit is interesting. Every Reply to a Tweet itself is a tweet and should be treated like so. So I'm adding a column """parent_tweet_id""" to the Tweet Table that will reference the ID of the Tweet that the reply belongs to. The """parent_tweet_id""" will have a ForeignKey Constraint which means that when a Tweet is created with a reference of parent_tweet_id, Rails will check the database and see if the parent_tweet_id that was passed is valid i.e. whether or not a Tweet with ID == parent_tweet_id exists in the database or not. If not, it will throw a ForeignKeyConstraintException.
+
+In Active Record Validations, I'm using Self Association and bi directional associations.

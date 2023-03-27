@@ -29,7 +29,7 @@
       </p>
       <div class="likes-and-comments w-100 d-flex justify-content-between">
         <%# Comments %>
-        <%= link_to tweet_path(tweet), data: {"ignore-click": true}, class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+        <%= link_to tweet_path(tweet), class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
           <div class="comment-icon  px-2 py-1 rounded-circle">
             <i class="bi bi-chat"></i>
           </div>
