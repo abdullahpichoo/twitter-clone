@@ -58,7 +58,7 @@
   <div class="modal-dialog">
     <div class="modal-content p-3">
       <button type="button" id = "smallScreenModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
-      <%= render partial: "tweets/form" %>
+      <%= render partial: 'tweets/form', locals: { submit_path: tweets_path, submit_label: "Tweet", form_placeholder: "What's happening?", pfp_size: "58x58" }  %>
     </div>
   </div>
 </div>

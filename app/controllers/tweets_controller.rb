@@ -11,6 +11,7 @@ class TweetsController < ApplicationController
     create_view unless View.exists?(user: current_user, tweet: @tweet)
 
     @full_tweet = @tweet
+    @reply_tweets =  @all_tweets = @tweet.reply_tweets.includes(:liked_users, :retweeted_users, :user).order(created_at: :desc)
   end
 
   def create

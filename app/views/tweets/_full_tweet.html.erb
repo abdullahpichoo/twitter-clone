@@ -41,3 +41,5 @@
 <div id="turbo-stats">
   <%= render partial: 'tweets/tweet_stats' %>
 </div>
+<%= render partial: 'tweets/form', locals: { submit_path: tweet_reply_tweets_path(@tweet) ,submit_label: "Reply", form_placeholder: "Tweet your reply", pfp_size: "58x58" } %>
+<%= render @reply_tweets %>
