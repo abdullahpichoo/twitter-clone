@@ -23,7 +23,13 @@
           </div>
         </div>
       </div>
-      <%# tweet Body %>
+      <%# Replying to %>
+      <% if tweet.parent_tweet_id? %>
+        <span class = "text-secondary">Replying to 
+          <span class = "text-primary">@<%= tweet.parent_tweet.user.username %></span>
+        </span>
+      <% end %>
+      <%# Tweet Body %>
       <p data-allow-click = "true" class="body">
         <%= tweet.body %>
       </p>
@@ -34,7 +40,7 @@
             <i class="bi bi-chat"></i>
           </div>
           <div class="comment-count fw-lighter">
-            5
+            <%= tweet.reply_tweets_count %>
           </div>
         <% end %>
         <%# Retweet %>
