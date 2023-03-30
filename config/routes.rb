@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'profile/show'
   resources :tweets, only: %i[index show create] do
     resources :likes, only: %i[create destroy]
     resources :retweets, only: %i[create destroy]
@@ -18,4 +17,7 @@ Rails.application.routes.draw do
     registrations: 'registrations'
   }
   resources :usernames, only: %i[new update]
+  resources :users, only: [:show] do
+    resources :followings, only: %i[create destroy]
+  end
 end
