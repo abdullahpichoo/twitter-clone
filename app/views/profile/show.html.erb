@@ -1,0 +1,39 @@
+  <%# min-width --> shows when the breakpoint hits %>
+<style>
+  /* Keeps the mobile sidebar in view until large screen is reached */
+    @media (min-width: 992px) {
+        .mobile-sidebar{
+            display:none;
+        }
+    }
+    /* Only shows the third column on lg screen */
+    /* Only screen < lg, third column will not show */
+    @media (max-width: 992px){
+      .third-column{
+            display:none;
+      }
+
+    }
+    /* Only shows the regular sidebar on lg screen */
+    @media (max-width: 992px){
+      .regular-sidebar{
+            display:none;
+      }
+    }
+</style>
+<div class="container-lg text-center">
+  <%= content_tag :div, "", class: "row justify-content-center", data: {controller: "dashboard"} do %>
+    <div class="col col-sm-auto mobile-sidebar" >
+      <%= render 'partials/sidebar_mobile' %>
+    </div>
+    <div class="col col-sm-auto regular-sidebar" >
+      <%= render 'partials/sidebar' %>
+    </div>
+    <section class="col col-lg-6" >
+      <%= render 'profile/full_profile' %>
+    </section>
+    <div class="col col-sm-auto third-column">
+      Third Col
+    </div>
+  <% end %>
+</div>

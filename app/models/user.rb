@@ -34,5 +34,12 @@ class User < ApplicationRecord
                             saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 80 }).processed
   end
 
+  def profile_page_thumbnail
+    return unless profile_picture.attached?
+
+    profile_picture.variant(resize_to_fill: [300, 300], format: :jpeg,
+                            saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 100 }).processed
+  end
+
   # saver: { subsample_mode: "on", strip: true, interlace: true, quality: 80 }: This option specifies the settings for the JPEG encoder. subsample_mode: "on" enables chroma subsampling, which reduces file size without significantly affecting image quality. strip: true removes any metadata from the image file. interlace: true enables progressive rendering, which loads a low-resolution version of the image first and then gradually improves the quality. quality: 80 sets the JPEG compression quality to 80 out of 100.
 end
