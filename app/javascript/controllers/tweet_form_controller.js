@@ -6,6 +6,7 @@ export default class extends Controller {
     this.element.addEventListener("turbo:submit-end", () => {
       document.getElementById("smallScreenModalCloseBtn").click();
       document.getElementById("regularScreenModalCloseBtn").click();
+      document.getElementById("profileModalCloseBtn").click();
       this.element.reset();
     });
   }

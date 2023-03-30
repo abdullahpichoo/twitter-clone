@@ -4,7 +4,11 @@ class ProfileController < ApplicationController
 
   def update
     current_user.update(user_params)
-    redirect_to profile_path
+    # redirect_to profile_path
+    respond_to do |format|
+      format.html { redirect_to profile_path }
+      format.turbo_stream
+    end
   end
 
   private
