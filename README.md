@@ -70,3 +70,29 @@ Same way I did the Likes and Retweet thing.
 This bit is interesting. Every Reply to a Tweet itself is a tweet and should be treated like so. So I'm adding a column """parent_tweet_id""" to the Tweet Table that will reference the ID of the Tweet that the reply belongs to. The """parent_tweet_id""" will have a ForeignKey Constraint which means that when a Tweet is created with a reference of parent_tweet_id, Rails will check the database and see if the parent_tweet_id that was passed is valid i.e. whether or not a Tweet with ID == parent_tweet_id exists in the database or not. If not, it will throw a ForeignKeyConstraintException.
 
 In Active Record Validations, I'm using Self Association and bi directional associations.
+
+### Following / Follower Associations
+
+I started out with making a Followings table that will contain entries for each user that follows another user.
+If user 1 follows user 3, then
+| Following |
+| user_id | following_user_id |
+| 1 | 3 |
+
+This means when a User follows another user, a new entry will be created in the Followings table, that will contain the ID of the user that initiated the follow as user_id and the user he started following as following_user_id.
+
+##### User Table Associations
+
+- has_many :followings, dependent: :destroy
+  A user may have many users that he is following.
+
+- has_many :following_users, through: :followings, source: :following_user
+  A user may have many users that he is following. Using a Join Table here, we can query all the individual users that a user is following as user.following_users
+
+- has_many :reverse_followings, foreign_key: :following_user_id, class_name: "Following"
+  As I said above, when user 1 is following user 3, there exists a instance of following_user for user 1.
+  In order to get the followers for user 3, we do reverse_followings association.
+  This essentially means that user 3 will also have access to the instanes of the following_user but in reverse. User 3 will be able to query and see all the users that are following him. This is done using the foreign key.
+
+- has_many :followers, through: :reverse_followings, source: :user
+  This simply means that a user will have many followers through the reverse_followings table.
