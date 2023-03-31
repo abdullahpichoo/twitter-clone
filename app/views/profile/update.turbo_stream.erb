@@ -1,3 +1,3 @@
-<%= turbo_stream.replace "profile-section" do %>
-  <%= render partial: "profile/full_profile", locals: {user: current_user} %>
+<%= turbo_stream.replace "user-profile-section" do %>
+  <%= render partial: "users/full_profile", locals: {user: @user } %>
 <% end %>

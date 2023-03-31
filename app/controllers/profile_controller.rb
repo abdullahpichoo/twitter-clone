@@ -1,9 +1,12 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!
-  def show; end
+  def show
+    @user = current_user
+  end
 
   def update
-    current_user.update(user_params)
+    @user = current_user
+    @user.update(user_params)
     # redirect_to profile_path
     respond_to do |format|
       format.html { redirect_to profile_path }
