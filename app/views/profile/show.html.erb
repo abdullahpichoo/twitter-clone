@@ -31,7 +31,7 @@
     </div>
     <section class="col col-lg-6" >
       <section id = "profile-section">
-        <%= render 'users/full_profile', locals:{ user: @user } %>
+        <%= render 'users/full_profile', locals:{ user: @user, user_tweets: @user_tweets } %>
       </section>
     </section>
     <div class="col col-sm-auto third-column">

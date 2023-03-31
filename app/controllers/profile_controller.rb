@@ -2,6 +2,7 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = current_user
+    @user_tweets = @user.tweets.where(parent_tweet_id: nil) | @user.retweeted_tweets
   end
 
   def update

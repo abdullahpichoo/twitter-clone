@@ -37,8 +37,11 @@
     <div id="follow-count">
       <%= render partial: 'users/follow_count', locals: {user: @user} %>
     </div>
-    <div class = "text-start fs-5 fw-bold">Tweets</div>
   </div>
+  <div class = "text-start fs-5 fw-bold p-3 border border-light-subtle border-top-0 rounded-0">Tweets</div>
+  <section id="tweets">
+    <%= render @user_tweets %>
+  </section>
   <%# Modal for Updating Profile %>
   <div class="modal" id="editProfileModal" tabindex="-1" aria-labelledby="regularScreenModalLabel" aria-hidden="true">
     <div class="modal-dialog">
