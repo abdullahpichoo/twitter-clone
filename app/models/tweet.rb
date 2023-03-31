@@ -2,12 +2,12 @@ class Tweet < ApplicationRecord
   belongs_to :user
 
   has_many :likes, dependent: :destroy
-  has_many :retweets, dependent: :destroy
-
-  has_many :views, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
 
+  has_many :retweets, dependent: :destroy
   has_many :retweeted_users, through: :retweets, source: :user
+
+  has_many :views, dependent: :destroy
   has_many :viewed_users, through: :views, source: :user
 
   # This is a Self Association of Reply Tweets with Tweets
