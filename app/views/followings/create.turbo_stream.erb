@@ -1,0 +1,6 @@
+<%= turbo_stream.replace "follow-unfollow-btn" do %>
+  <%= render partial: 'users/follow_unfollow', locals: {user: @followed_by,  current_user: current_user } %>
+<% end %>
+<%= turbo_stream.replace "follow-count" do %>
+  <%= render partial: 'profile/follow_count', locals: { user: @followed_by } %>
+<% end %>

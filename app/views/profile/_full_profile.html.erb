@@ -30,10 +30,10 @@
     </div>
     <div class="d-flex gap-3 text-start mb-5">
       <div class = "fw-light" >
-        <b class= "fw-bold"> 16</b> Following
+        <b class= "fw-bold"> <%= current_user.followings_count %></b> Following
       </div>
       <div class = "fw-light" >
-        <b class= "fw-bold"> 16</b> Followers
+        <b class= "fw-bold">  <%= current_user.followers_count %></b> Followers
       </div>
     </div>
     <div class = "text-start fs-5 fw-bold">Tweets</div>

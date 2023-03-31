@@ -1,15 +1,24 @@
 class FollowingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :user
 
   def create
     following = user.followings.create(following_params)
-    redirect_to user_path(User.find(following.following_user_id))
+    @followed_by = following.following_user
+    respond_to do |format|
+      format.html { redirect_to user_path(following.following_user) }
+      format.turbo_stream
+    end
   end
 
   def destroy
     following = Following.find(params[:id])
     following.destroy
-    redirect_to user_path(User.find(following.following_user_id))
+
+    respond_to do |format|
+      format.html { redirect_to user_path(following.following_user) }
+      format.turbo_stream
+    end
   end
 
   private
@@ -19,6 +28,6 @@ class FollowingsController < ApplicationController
   end
 
   def following_params
-    params.permit(:following_user_id)
+    params.permit(:user_id, :following_user_id)
   end
 end

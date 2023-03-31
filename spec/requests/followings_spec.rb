@@ -17,7 +17,7 @@ RSpec.describe 'Followings', type: :request do
   end
 
   describe 'DELETE /destroy' do
-    it 'returns http success' do
+    it 'removes the following' do
       following = create(:following, user: user_a, following_user: user_b)
       expect do
         delete user_following_path(user_a, following)
