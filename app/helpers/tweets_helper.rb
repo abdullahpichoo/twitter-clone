@@ -18,6 +18,15 @@ module TweetsHelper
     tweet.created_at.strftime('%b %e, %Y')
   end
 
+  # Checking if the current_user has retweeted this tweet and it's their profile page then show "You Retweeted"
+  def retweeted_by_user_on_profile(tweet, current_user)
+    return false unless controller_name == 'profile'
+
+    return false unless tweet.retweeted_users.include?(current_user)
+
+    true
+  end
+
   # For Liked Tweets ------------------------------------------
   # Returns the route path for liking a tweet (create,destroy)
   def get_tweet_like_path(current_user, tweet)

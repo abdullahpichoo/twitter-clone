@@ -1,75 +1,82 @@
 <%= turbo_frame_tag dom_id(tweet) do %>
-  <article data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" class="tweet card border border-light-subtle border-top-0 rounded-0 d-flex flex-row justify-content-evenly">
-    <div class="icon fs-1 m-2">
-      <% if tweet.user.profile_picture.attached? %>
-        <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
-      <% else %>
-        <i class="bi bi-person-circle"></i>
-      <% end %>
-    </div>
-    <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
-      <%# Username Info %>
-      <div class="d-flex gap-2">
-        <div class="full-name fw-bold">
-          <%= tweet.user.display_name %>
-        </div>
-        <div class="username d-flex fw-light">
-          <div class="username">
-            @<%= tweet.user.username %>
-          </div>
-          <i class="bi bi-dot"></i>
-          <div class="created-at">
-            <%= posted_at(tweet) %>
-          </div>
-        </div>
+  <article data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" class="tweet card border border-light-subtle border-top-0 rounded-0">
+    <% if retweeted_by_user_on_profile(tweet, current_user) %>
+      <span class="retweeted-tag fs-6 fw-bold text-secondary text-start mt-1 ms-5">
+        You Retweeted
+      </span>
+    <% end %>
+    <div class = " d-flex flex-row justify-content-evenly">
+      <div class="icon fs-1 m-2">
+        <% if tweet.user.profile_picture.attached? %>
+          <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
+        <% else %>
+          <i class="bi bi-person-circle"></i>
+        <% end %>
       </div>
-      <%# Replying to %>
-      <% if tweet.parent_tweet_id? %>
-        <span class = "text-secondary">Replying to 
-          <span class = "text-primary">@<%= tweet.parent_tweet.user.username %></span>
-        </span>
-      <% end %>
-      <%# Tweet Body %>
-      <p data-allow-click = "true" class="body">
-        <%= tweet.body %>
-      </p>
-      <div class="likes-and-comments w-100 d-flex justify-content-between">
-        <%# Comments %>
-        <%= link_to tweet_path(tweet), class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
-          <div class="comment-icon  px-2 py-1 rounded-circle">
-            <i class="bi bi-chat"></i>
+      <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
+        <%# Username Info %>
+        <div class="d-flex gap-2">
+          <div class="full-name fw-bold">
+            <%= tweet.user.display_name %>
           </div>
-          <div class="comment-count fw-lighter">
-            <%= tweet.reply_tweets_count %>
+          <div class="username d-flex fw-light">
+            <div class="username">
+              @<%= tweet.user.username %>
+            </div>
+            <i class="bi bi-dot"></i>
+            <div class="created-at">
+              <%= posted_at(tweet) %>
+            </div>
           </div>
+        </div>
+        <%# Replying to %>
+        <% if tweet.parent_tweet_id? %>
+          <span class = "text-secondary">Replying to 
+            <span class = "text-primary">@<%= tweet.parent_tweet.user.username %></span>
+          </span>
         <% end %>
-        <%# Retweet %>
-        <%= link_to get_tweet_retweet_path(current_user, tweet), data: {"ignore-click": true, "turbo-method": get_retweeted_tweet_data_method(current_user, tweet) }, class: "retweets d-flex align-items-center gap-1 text-black text-decoration-none" do %>
-          <div class="retweet-icon px-2 py-1 rounded-circle">
-            <i class = "bi bi-arrow-left-right" style = "<%=get_retweet_icon_style(current_user, tweet)%>" ></i>
-          </div>
-          <div class="retweet-count fw-lighter"  style = "<%=get_retweet_icon_style(current_user, tweet)%>" >
-            <%= tweet.retweets_count %>
-          </div>
-        <% end %>
-        <%# Likes %>
-        <%= link_to get_tweet_like_path(current_user, tweet), data: {"ignore-click": true, "turbo-method": get_liked_tweet_data_method(current_user, tweet) }, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
-          <div class="like-icon px-2 py-1 rounded-circle">
-            <i class = "<%=get_heart_type(current_user, tweet)%>" style = "<%=get_heart_style(current_user, tweet)%>" ></i>
-          </div>
-          <div class="like-count fw-lighter" style = "<%=get_heart_style(current_user, tweet)%>" >
-            <%= tweet.likes_count %>
-          </div>
-        <% end %>
-        <%# Views %>
-        <%= link_to dashboard_path, data: {"ignore-click": true}, class: "views d-flex align-items-center gap-1 text-black text-decoration-none me-4" do %>
-          <div class="views-icon px-2 py-1 rounded-circle">
-            <i class="bi bi-bar-chart-line"></i>
-          </div>
-          <div class="views-count fw-lighter">
-            <%= tweet.views_count %>
-          </div>
-        <% end %>
+        <%# Tweet Body %>
+        <p data-allow-click = "true" class="body">
+          <%= tweet.body %>
+        </p>
+        <div class="likes-and-comments w-100 d-flex justify-content-between">
+          <%# Comments %>
+          <%= link_to tweet_path(tweet), class: "comments d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+            <div class="comment-icon  px-2 py-1 rounded-circle">
+              <i class="bi bi-chat"></i>
+            </div>
+            <div class="comment-count fw-lighter">
+              <%= tweet.reply_tweets_count %>
+            </div>
+          <% end %>
+          <%# Retweet %>
+          <%= link_to get_tweet_retweet_path(current_user, tweet), data: {"ignore-click": true, "turbo-method": get_retweeted_tweet_data_method(current_user, tweet) }, class: "retweets d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+            <div class="retweet-icon px-2 py-1 rounded-circle">
+              <i class = "bi bi-arrow-left-right" style = "<%=get_retweet_icon_style(current_user, tweet)%>" ></i>
+            </div>
+            <div class="retweet-count fw-lighter"  style = "<%=get_retweet_icon_style(current_user, tweet)%>" >
+              <%= tweet.retweets_count %>
+            </div>
+          <% end %>
+          <%# Likes %>
+          <%= link_to get_tweet_like_path(current_user, tweet), data: {"ignore-click": true, "turbo-method": get_liked_tweet_data_method(current_user, tweet) }, class: "likes d-flex align-items-center gap-1 text-black text-decoration-none" do %>
+            <div class="like-icon px-2 py-1 rounded-circle">
+              <i class = "<%=get_heart_type(current_user, tweet)%>" style = "<%=get_heart_style(current_user, tweet)%>" ></i>
+            </div>
+            <div class="like-count fw-lighter" style = "<%=get_heart_style(current_user, tweet)%>" >
+              <%= tweet.likes_count %>
+            </div>
+          <% end %>
+          <%# Views %>
+          <%= link_to dashboard_path, data: {"ignore-click": true}, class: "views d-flex align-items-center gap-1 text-black text-decoration-none me-4" do %>
+            <div class="views-icon px-2 py-1 rounded-circle">
+              <i class="bi bi-bar-chart-line"></i>
+            </div>
+            <div class="views-count fw-lighter">
+              <%= tweet.views_count %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </article>
