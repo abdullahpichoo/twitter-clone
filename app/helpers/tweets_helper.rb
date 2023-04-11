@@ -21,7 +21,7 @@ module TweetsHelper
   # For Liked Tweets ------------------------------------------
   # Returns the route path for liking a tweet (create,destroy)
   def get_tweet_like_path(current_user, tweet)
-    if current_user_liked_this_tweet?(current_user, tweet) && !tweet.likes.empty?
+    if current_user_liked_this_tweet?(current_user, tweet)
       tweet_like_path(tweet, tweet.likes.find_by(user: current_user))
     else
       tweet_likes_path(tweet)
@@ -60,7 +60,7 @@ module TweetsHelper
 
   # For Retweeted Tweets --------------------------------------
   def get_tweet_retweet_path(current_user, tweet)
-    if current_user_retweeted_this_tweet?(current_user, tweet) && !tweet.retweets.empty?
+    if current_user_retweeted_this_tweet?(current_user, tweet)
       tweet_retweet_path(tweet, tweet.retweets.find_by(user: current_user))
     else
       tweet_retweets_path(tweet)
@@ -93,7 +93,7 @@ module TweetsHelper
   def current_user_liked_this_tweet(current_user, tweet)
     return unless tweet.likes_count.positive?
 
-    @current_user_liked_this_tweet ||= tweet.liked_users.include?(current_user)
+    @current_user_liked_this_tweet = tweet.liked_users.include?(current_user)
   end
 
   alias current_user_liked_this_tweet? current_user_liked_this_tweet
@@ -102,7 +102,7 @@ module TweetsHelper
   def current_user_retweeted_this_tweet(current_user, tweet)
     return unless tweet.retweets_count.positive?
 
-    @current_user_retweeted_this_tweet ||= tweet.retweeted_users.include?(current_user)
+    @current_user_retweeted_this_tweet = tweet.retweeted_users.include?(current_user)
   end
 
   alias current_user_retweeted_this_tweet? current_user_retweeted_this_tweet
