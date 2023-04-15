@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  public_activity:
+    tweet:
+      create: "has Tweeted"
+    reply_tweet:
+      create: "replied to your tweet"

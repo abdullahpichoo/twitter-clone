@@ -1,4 +1,7 @@
 class Tweet < ApplicationRecord
+  include PublicActivity::Model
+  tracked owner: proc { |controller, _model| controller.current_user }
+
   belongs_to :user
 
   has_many :likes, dependent: :destroy
