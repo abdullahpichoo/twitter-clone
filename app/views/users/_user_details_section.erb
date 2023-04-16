@@ -1,0 +1,38 @@
+<%= turbo_frame_tag "user#{dom_id(@user)}_details_section" do %>
+  <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+    <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+      <i class="bi bi-arrow-left"></i>
+    <% end %>
+    <h4><%= @user.display_name %></h4>
+  </div>
+  <div class="border border-light-subtle border-bottom-0 border-top-0 rounded-0 p-3">
+    <div class="pfp d-flex flex-column align-items-start gap-3">
+      <div class = "w-100 d-flex justify-content-between">
+        <div class="pfp">
+          <% if @user.profile_picture.attached? %>
+            <%= image_tag(@user.profile_page_thumbnail, size: '120x120' , class: "rounded-circle") %>
+          <% else %>
+            <%= image_tag "user-blank.png" %>
+          <% end %>
+        </div>
+        <% if controller_name == "profile" %>
+          <span>
+            <%= button_tag "Edit Profile", data:{"bs-toggle": "modal",  "bs-target": "#editProfileModal"}, class: "fw-bold btn btn-light border border-2 rounded-pill"%>
+          </span>
+        <% else %>
+          <div id = "follow-unfollow-button" >
+            <%= render partial: 'users/follow_unfollow', locals:{ user: @user } %>
+          </div>
+        <% end %>
+      </div>
+      <div class = "d-flex flex-column text-start" >
+        <h4 class="full-name fw-bolder">
+          <%= @user.display_name %>
+        </h4>
+        <div class="username fw-light">
+          @<%= @user.username %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

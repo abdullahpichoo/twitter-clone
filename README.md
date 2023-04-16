@@ -110,6 +110,6 @@ Type of notifications:
 
 ##### To do
 
-- Write public activity specs
+- Write public activity specs X
 - add third col to main page
 - make a bottom bar for phone
