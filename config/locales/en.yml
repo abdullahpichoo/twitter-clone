@@ -35,4 +35,10 @@ en:
     tweet:
       create: "has Tweeted"
     reply_tweet:
-      create: "replied to your tweet"
+      create: "replied to your Tweet"
+    like:
+      create: "liked your Tweet"
+    retweet:
+      create: "retweeted your Tweet"
+    follow:
+      create: "started following you"

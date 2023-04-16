@@ -1,6 +1,6 @@
 module NotificationsHelper
   # Returns the Time Difference of when tweet was posted by now
-  def posted_at(tweet)
+  def created_at(tweet)
     if (Time.zone.now - tweet.created_at) > 1.day
       tweet.created_at.strftime('%b %-d')
     else

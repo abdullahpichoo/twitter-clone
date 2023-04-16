@@ -1,6 +1,6 @@
 class Tweet < ApplicationRecord
-  include PublicActivity::Model
-  tracked owner: proc { |controller, _model| controller.current_user }
+  include PublicActivity::Common
+  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
 
   belongs_to :user
 

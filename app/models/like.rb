@@ -11,5 +11,9 @@ class Like < ApplicationRecord
   belongs_to :tweet, counter_cache: :likes_count
   belongs_to :user
 
+  # For Notifications
+  include PublicActivity::Common
+  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
+
   validates :user_id, uniqueness: { scope: :tweet_id }
 end

@@ -2,18 +2,14 @@
   Notifications
 </h1>
 <% @notifications.each do |notification| %>
-  <% if notification.trackable_type == 'Tweet' %>
-    <div style="border: solid 1px black">
-      <% tweet = notification.trackable %>
-      <% owner = notification.owner %>
-      <% if tweet.nil? %>
-        <% next %>
-      <% end %>
-      <div class="notification">
-        <h3> <%= tweet.user.display_name %> </h3>
-        <span><%= t("public_activity.#{notification.key}")%>.<%= posted_at(tweet)%></span>
-        <span><%= notification.parameters[:parent_tweet_id] %></span>
-      </div>
-    </div>
+  <div class = "border border-1 ">
+    <% if notification.trackable_type == "Like" %>
+      <%= render 'notification', type: "Like", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
+    <% elsif notification.trackable_type == "Retweet" %>
+      <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
+    <% elsif notification.trackable_type == "Following" %>
+      <%= render 'notification', type: "Following", notification: notification, tweet: notification.trackable , owner: notification.owner %>
+    <% else %>
+      <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable , owner: notification.owner %>
+    <% end %>
   <% end %>
-<% end %>

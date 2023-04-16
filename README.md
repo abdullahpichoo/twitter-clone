@@ -96,3 +96,14 @@ This means when a User follows another user, a new entry will be created in the 
 
 - has_many :followers, through: :reverse_followings, source: :user
   This simply means that a user will have many followers through the reverse_followings table.
+
+##### Notifications
+
+I'm handling notifications using the public activity gem.
+Type of notifications:
+
+- Liked your tweet (just show tweet body)
+- Replied to your tweet (unke reply ki body)
+- Retweeted your tweet
+- Started following you
+- Liked your retweet (original tweet ki body)
