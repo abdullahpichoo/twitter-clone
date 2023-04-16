@@ -1,15 +1,58 @@
-<h1>
-  Notifications
-</h1>
-<% @notifications.each do |notification| %>
-  <div class = "border border-1 ">
-    <% if notification.trackable_type == "Like" %>
-      <%= render 'notification', type: "Like", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
-    <% elsif notification.trackable_type == "Retweet" %>
-      <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
-    <% elsif notification.trackable_type == "Following" %>
-      <%= render 'notification', type: "Following", notification: notification, tweet: notification.trackable , owner: notification.owner %>
-    <% else %>
-      <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable , owner: notification.owner %>
+<%# min-width --> shows when the breakpoint hits %>
+<style>
+  /* Keeps the mobile sidebar in view until large screen is reached */
+    @media (min-width: 992px) {
+        .mobile-sidebar{
+            display:none;
+        }
+    }
+    /* Only shows the third column on lg screen */
+    /* Only screen < lg, third column will not show */
+    @media (max-width: 992px){
+      .third-column{
+            display:none;
+      }
+
+    }
+    /* Only shows the regular sidebar on lg screen */
+    @media (max-width: 992px){
+      .regular-sidebar{
+            display:none;
+      }
+    }
+</style>
+<div class="container-lg text-center">
+  <%= content_tag :div, "", class: "row justify-content-center", data: {controller: "dashboard"} do %>
+    <div class="col col-sm-auto mobile-sidebar" >
+      <%= render 'partials/sidebar_mobile' %>
+    </div>
+    <div class="col col-sm-auto regular-sidebar" >
+      <%= render 'partials/sidebar' %>
+    </div>
+    <section class="col col-lg-6" >
+      <section id = "notfications">
+        <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+          <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+            <i class="bi bi-arrow-left"></i>
+          <% end %>
+          <h4>Notifications</h4>
+        </div>
+        <% @notifications.each do |notification| %>
+          <div class = "notifications border border-1 ">
+            <% if notification.trackable_type == "Like" %>
+              <%= render 'notification', type: "Like", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
+            <% elsif notification.trackable_type == "Retweet" %>
+              <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
+            <% elsif notification.trackable_type == "Following" %>
+              <%= render 'notification', type: "Following", notification: notification, tweet: notification.trackable , owner: notification.owner %>
+            <% else %>
+              <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable , owner: notification.owner %>
+            <% end %>
+          <% end %>
+        </section>
+      </section>
+      <div class="col col-sm-auto third-column">
+        Third Col
+      </div>
     <% end %>
-  <% end %>
+  </div>
