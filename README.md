@@ -107,3 +107,9 @@ Type of notifications:
 - Retweeted your tweet
 - Started following you
 - Liked your retweet (original tweet ki body)
+
+##### To do
+
+- Write public activity specs
+- add third col to main page
+- make a bottom bar for phone

@@ -58,7 +58,7 @@ RSpec.describe '/tweets', type: :request do
         sign_in user
         expect do
           post tweets_path, params: { tweet: valid_attributes }
-        end.to change { Tweet.count }.by(1)
+        end.to change { Tweet.count && PublicActivity::Activity.count }.by(1)
         expect(response).to redirect_to(dashboard_path)
       end
     end

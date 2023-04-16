@@ -10,7 +10,7 @@ RSpec.describe 'Likes', type: :request do
     it 'creates a new like' do
       expect do
         post tweet_likes_path(tweet)
-      end.to change { Like.count }.by(1)
+      end.to change { Like.count && PublicActivity::Activity.count }.by(1)
       expect(response).to have_http_status(:redirect)
     end
   end

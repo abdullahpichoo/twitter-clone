@@ -10,7 +10,7 @@ RSpec.describe 'Retweets', type: :request do
     it 'creates a new retweet' do
       expect do
         post tweet_retweets_path(tweet)
-      end.to change { Retweet.count }.by(1)
+      end.to change { Retweet.count && PublicActivity::Activity.count }.by(1)
       expect(response).to have_http_status(:redirect)
     end
   end
