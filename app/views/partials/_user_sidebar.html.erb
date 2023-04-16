@@ -1,0 +1,25 @@
+<style>
+  .pfp{
+      z-index: 2;
+  }
+  .sidebar{
+      z-index: 2;
+
+  }
+</style>
+<div class="pfp position-absolute top-0 end-0 p-2 me-2" id = "user-profile-link">
+  <% if current_user.profile_picture.attached? %>
+    <%= image_tag(current_user.profile_thumbnail, size: "38x38" , class: "rounded-circle")%>
+  <% else %>
+    <i class="bi bi-person-circle"></i>
+  <% end %>
+</div>
+<div class="sidebar max-w-25 position-absolute" id="sidebar">
+  <div class="bg-dark border-right vh-100" id="sidebar-wrapper">
+    <div class="sidebar-heading text-white">My App</div>
+    <div class="list-group list-group-flush">
+      <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Show Profile</a>
+      <a href="#" class="list-group-item list-group-item-action bg-dark text-white">Log Out</a>
+    </div>
+  </div>
+</div>

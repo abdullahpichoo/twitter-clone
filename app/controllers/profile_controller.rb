@@ -2,7 +2,7 @@ class ProfileController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = current_user
-    @user_tweets = @user.tweets.where(parent_tweet_id: nil) | @user.retweeted_tweets
+    @user_tweets = @user.tweets.where(parent_tweet_id: nil).order(created_at: :desc) | @user.retweeted_tweets.order(created_at: :desc)
   end
 
   def update

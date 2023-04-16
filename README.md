@@ -111,5 +111,5 @@ Type of notifications:
 ##### To do
 
 - Write public activity specs X
-- add third col to main page
+- add third col to main page X
 - make a bottom bar for phone

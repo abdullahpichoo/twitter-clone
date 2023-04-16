@@ -1,8 +1,20 @@
-<%# Profile Picture and Username %>
-<%= render 'users/user_details_section' %>
-<%# Follower Following Count %>
-<div id="follow-count">
-  <%= render partial: 'users/follow_count', locals: {user: @user} %>
+<div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+  <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+    <i class="bi bi-arrow-left"></i>
+  <% end %>
+  <h4 class = "mb-0"><%= @user.display_name %></h4>
+  <%= link_to destroy_user_session_path, data: {"turbo-method": :delete}, class: "btn btn-outline-danger rounded-pill ms-auto me-3" do %>
+    <i class="bi bi-box-arrow-left"></i>
+    <span>Logout</span>
+  <% end %>
+</div>
+<div class="border border-light-subtle border-bottom-0 border-top-0 rounded-0 p-3">
+  <%# Profile Picture and Username %>
+  <%= render 'users/user_details_section' %>
+  <%# Follower Following Count %>
+  <div id="follow-count">
+    <%= render partial: 'users/follow_count', locals: {user: @user} %>
+  </div>
 </div>
 <div class = "text-start fs-5 fw-bold p-3 border border-light-subtle border-top-0 rounded-0">Tweets</div>
 <section id="tweets">

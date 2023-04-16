@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
   before_action :set_up_username
+  before_action :set_all_users
+
+  def set_all_users
+    @all_users ||= User.all.where.not(id: current_user.id)
+  end
 
   protected
 

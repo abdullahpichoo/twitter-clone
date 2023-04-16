@@ -1,4 +1,7 @@
-<h3 class = "w-100 d-flex text-start card border border-light-subtle border-top-0 rounded-0 mb-0 p-2">Home</h3>
+<div class="d-block d-sm-none twitter-icon text-center text-primary fs-1">
+  <i class="bi bi-twitter"></i>
+</div>
+<h3 class = "w-100 d-flex text-center text-sm-start  card border border-light-subtle border-top-0 rounded-0 mb-0 p-2">Home</h3>
 <%=render partial: 'tweets/form', locals: { submit_path: tweets_path, submit_label: "Tweet", form_placeholder: "What's happening?", pfp_size: "80x80" } %>
 <section id="tweets">
   <%= render @all_tweets %>

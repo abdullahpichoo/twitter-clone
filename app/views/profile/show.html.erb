@@ -1,41 +1,31 @@
-  <%# min-width --> shows when the breakpoint hits %>
 <style>
-  /* Keeps the mobile sidebar in view until large screen is reached */
-    @media (min-width: 992px) {
-        .mobile-sidebar{
-            display:none;
-        }
-    }
-    /* Only shows the third column on lg screen */
-    /* Only screen < lg, third column will not show */
-    @media (max-width: 992px){
-      .third-column{
-            display:none;
-      }
-
-    }
-    /* Only shows the regular sidebar on lg screen */
-    @media (max-width: 992px){
-      .regular-sidebar{
-            display:none;
-      }
-    }
+  .middle-column{
+    padding-bottom: 4.5rem;
+  }
 </style>
-<div class="container-lg text-center">
-  <%= content_tag :div, "", class: "row justify-content-center", data: {controller: "dashboard"} do %>
-    <div class="col col-sm-auto mobile-sidebar" >
+<div class="container">
+  <div class = "row justify-content-center">
+    <div class="col col-sm-auto col-md-auto d-none d-sm-block d-xl-none" >
       <%= render 'partials/sidebar_mobile' %>
     </div>
-    <div class="col col-sm-auto regular-sidebar" >
+    <div class="col col-sm-auto d-none d-xl-block" >
       <%= render 'partials/sidebar' %>
     </div>
-    <section class="col col-lg-6" >
-      <section id = "profile-section">
-        <%= render 'users/full_profile', locals:{ user: @user, user_tweets: @user_tweets } %>
+    <div class="d-block d-sm-none" >
+      <%= render 'partials/mobile_toolbar' %>
+    </div>
+    <section class="ps-0 pe-0 middle-column m-0 p-sm-2 col col-sm-auto col-md-10 col-lg-6 col-xl-5 col-xxl-6">
+      <section id = "user-profile-section">
+        <%= render 'users/full_profile', locals:{ user: @user } %>
       </section>
     </section>
-    <div class="col col-sm-auto third-column">
-      Third Col
+    <div class="col col-sm-auto d-none d-lg-block">
+      <section>
+        <h4 class = "border border-light-subtle mb-0 p-2 fw-bold">Who to follow</h4>
+        <% @all_users.each do |user| %>
+          <%= render 'users/follow_user_card', user: user %>
+        <% end %>
+      </section>
     </div>
-  <% end %>
+  </div>
 </div>

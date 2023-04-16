@@ -1,0 +1,41 @@
+<div class="container-fluid border fixed-bottom">
+  <div class="row fs-2 p-3 align-content-center justify-content-between bg-light">
+    <div class="col-2 text-center">
+      <%= link_to dashboard_path, class: "text-decoration-none text-dark" do %>
+        <% if controller_name == "dashboard" %>
+          <i class="bi bi-house-door-fill"></i>
+        <% else %>
+          <i class="bi bi-house-door"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-2 text-center">
+      <%= link_to dashboard_path, class: "text-decoration-none text-dark" do %>
+        <i class="bi bi-search"></i>
+      <% end %>
+    </div>
+    <div class="col-2 text-center">
+      <%= link_to notifications_path, class: "text-decoration-none text-dark" do %>
+        <% if controller_name == "notifications" %>
+          <i class="bi bi-bell-fill"></i>
+        <% else %>
+          <i class="bi bi-bell"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-2 text-center" id="profile-link">
+      <%= link_to profile_path, class: "text-decoration-none text-dark" do %>
+        <% if controller_name == "profile" %>
+          <i class="bi bi-person-fill"></i>
+        <% else %>
+          <i class="bi bi-person"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if false %>
+  <span class="position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+    <span class="visually-hidden">New alerts</span>
+  </span>
+<% end %>
