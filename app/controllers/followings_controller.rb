@@ -3,7 +3,6 @@ class FollowingsController < ApplicationController
   before_action :user
 
   def create
-    set_sidebar_user
     following = user.followings.create(following_params)
     following.create_activity(key: 'follow.create', owner: current_user, parameters: { unread: true })
     @followed_by = following.following_user
@@ -27,10 +26,6 @@ class FollowingsController < ApplicationController
 
   def user
     @user ||= User.find(params[:user_id])
-  end
-
-  def set_sidebar_user
-    @sidebar_user ||= User.find(params[:following_user_id])
   end
 
   def following_params

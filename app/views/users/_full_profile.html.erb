@@ -1,55 +1,57 @@
-<div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
-  <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
-    <i class="bi bi-arrow-left"></i>
-  <% end %>
-  <h4 class = "mb-0"><%= @user.display_name %></h4>
-  <% if @user.id == current_user.id %>
-    <%= link_to destroy_user_session_path, data: {"turbo-method": :delete}, class: "btn btn-outline-danger rounded-pill ms-auto me-3" do %>
-      <i class="bi bi-box-arrow-left"></i>
-      <span>Logout</span>
+<div class="w-100">
+  <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+    <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+      <i class="bi bi-arrow-left"></i>
     <% end %>
-  <% end %>
-</div>
-<div class="border border-light-subtle border-bottom-0 border-top-0 rounded-0 p-3">
-  <%# Profile Picture and Username %>
-  <%= render 'users/user_details_section' %>
-  <%# Follower Following Count %>
-  <div id="follow-count">
-    <%= render partial: 'users/follow_count', locals: {user: @user} %>
-  </div>
-</div>
-<div class = "text-start fs-5 fw-bold p-3 border border-light-subtle border-top-0 rounded-0">Tweets</div>
-<section id="tweets">
-  <%= render @user_tweets %>
-</section>
-<%# Modal for Updating Profile %>
-<div class="modal" id="editProfileModal" tabindex="-1" aria-labelledby="regularScreenModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content p-3">
-      <button type="button" id = "profileModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
-      <%= form_with model: current_user, url: profile_path, html: {method: :put}, data: {controller: "tweet-form"} do |f| %>
-        <div class="container ps-5 pe-5">
-          <%# Username %>
-          <div class="field mb-2">
-            <%= f.label :username, class: "fw-bold fs-5 mb-1" %><br />
-            <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
-          </div>
-          <%# Display Name %>
-          <div class="field mb-2">
-            <%= f.label :display_name, class: "fw-bold fs-5 mb-1" %><br />
-            <%= f.text_field :display_name, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
-          </div>
-          <%# Profile Picture %>
-          <%= f.label :profile_picture, class: "fw-bold fs-5 mb-1" %><br />
-          <div class="input-group mb-2">
-            <%= f.file_field :profile_picture, class: "form-control form-control-lg" %>
-          </div>
-          <%# Submit %>
-          <div class="actions mt-4 mb-4">
-            <%= f.submit "Update Profile", class: "btn btn-lg btn-primary w-100" %>
-          </div>
-        </div>
+    <h4 class = "mb-0"><%= @user.display_name %></h4>
+    <% if @user.id == current_user.id %>
+      <%= link_to destroy_user_session_path, data: {"turbo-method": :delete}, class: "btn btn-outline-danger rounded-pill ms-auto me-3" do %>
+        <i class="bi bi-box-arrow-left"></i>
+        <span>Logout</span>
       <% end %>
+    <% end %>
+  </div>
+  <div class="border border-light-subtle border-bottom-0 border-top-0 rounded-0 p-3">
+    <%# Profile Picture and Username %>
+    <%= render 'users/user_details_section' %>
+    <%# Follower Following Count %>
+    <div id="follow-count">
+      <%= render partial: 'users/follow_count', locals: {user: @user} %>
+    </div>
+  </div>
+  <div class = "text-start fs-5 fw-bold p-3 border border-light-subtle border-top-0 rounded-0">Tweets</div>
+  <section id="tweets">
+    <%= render @user_tweets %>
+  </section>
+  <%# Modal for Updating Profile %>
+  <div class="modal" id="editProfileModal" tabindex="-1" aria-labelledby="regularScreenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content p-3">
+        <button type="button" id = "profileModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
+        <%= form_with model: current_user, url: profile_path, html: {method: :put}, data: {controller: "tweet-form"} do |f| %>
+          <div class="container ps-5 pe-5">
+            <%# Username %>
+            <div class="field mb-2">
+              <%= f.label :username, class: "fw-bold fs-5 mb-1" %><br />
+              <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+            </div>
+            <%# Display Name %>
+            <div class="field mb-2">
+              <%= f.label :display_name, class: "fw-bold fs-5 mb-1" %><br />
+              <%= f.text_field :display_name, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+            </div>
+            <%# Profile Picture %>
+            <%= f.label :profile_picture, class: "fw-bold fs-5 mb-1" %><br />
+            <div class="input-group mb-2">
+              <%= f.file_field :profile_picture, class: "form-control form-control-lg" %>
+            </div>
+            <%# Submit %>
+            <div class="actions mt-4 mb-4">
+              <%= f.submit "Update Profile", class: "btn btn-lg btn-primary w-100" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

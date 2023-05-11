@@ -1,3 +1,8 @@
+<style>
+  .display-name:hover, .user-username:hover {
+    text-decoration: underline;
+  }
+</style>
 <%= turbo_frame_tag dom_id(tweet) do %>
   <article data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" data-user-path = "<%= user_path(tweet.user)%>" class="tweet border border-light-subtle border-top-0 rounded-0">
     <% if retweeted_by_user_on_profile(tweet, current_user) %>
@@ -16,11 +21,11 @@
       <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
         <%# Username Info %>
         <%= link_to user_path(tweet.user), data: { "ignore-click": true, 'allow-user-profile-visit': true }, class: "d-flex gap-2 text-decoration-none text-black" do%>
-          <div class="full-name fw-bold text-truncate">
+          <div class="display-name fw-bold text-truncate">
             <%= tweet.user.display_name %>
           </div>
-          <div class="username d-flex text-secondary fw-light">
-            <div class="username">
+          <div class="d-flex text-secondary fw-light">
+            <div class="user-username">
               @<%= tweet.user.username %>
             </div>
             <i class="bi bi-dot"></i>

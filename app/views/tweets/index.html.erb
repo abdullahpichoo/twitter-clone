@@ -3,6 +3,6 @@
 </div>
 <h3 class = "w-100 d-flex text-center text-sm-start  card border border-light-subtle border-top-0 rounded-0 mb-0 p-2">Home</h3>
 <%=render partial: 'tweets/form', locals: { submit_path: tweets_path, submit_label: "Tweet", form_placeholder: "What's happening?", pfp_size: "80x80" } %>
-<section id="tweets">
+<section id="tweets" class = "w-100">
   <%= render @all_tweets %>
 </section>
