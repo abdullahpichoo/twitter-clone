@@ -1,3 +1,9 @@
+<style>
+  .display-name:hover, .user-username:hover {
+     text-decoration: underline;
+     cursor: pointer;
+   }
+</style>
 <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
   <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
     <i class="bi bi-arrow-left"></i>
@@ -7,23 +13,23 @@
 <div class="tweet-details card text-start border border-light-subtle border-top-0 rounded-0 p-3">
   <%# Profile Picture and Username %>
   <div class="d-flex gap-2 align-items-center mb-3">
-    <div class="pfp fs-1 me-2">
+    <%= link_to user_path(@tweet.user) ,class: "pfp fs-1 me-2 text-dark" do %>
       <% if @tweet.user.profile_picture.attached? %>
         <%= image_tag(@tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
       <% else %>
         <i class="bi bi-person-circle"></i>
       <% end %>
-    </div>
-    <div class="d-flex flex-column">
-      <div class="full-name fw-bold">
+    <% end %>
+    <%= link_to user_path(@tweet.user), class: "d-flex flex-column text-decoration-none text-black" do %>
+      <div class="display-name fw-bold">
         <%= @tweet.user.display_name %>
       </div>
-      <div class="username d-flex fw-light">
-        <div class="username">
+      <div class="username d-flex fw-light text-secondary">
+        <div class="user-username">
           @<%= @tweet.user.username %>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <%# @tweet Body %>
   <p class="ms-1 fs-4 body">
