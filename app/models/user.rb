@@ -15,7 +15,7 @@ class User < ApplicationRecord
   # following_users -> all the users that a user X is following.
   has_many :followings, dependent: :destroy
   has_many :following_users, through: :followings, source: :following_user
-  has_many :reverse_followings, foreign_key: :following_user_id, class_name: "Following"
+  has_many :reverse_followings, foreign_key: :following_user_id, class_name: 'Following'
   has_many :followers, through: :reverse_followings, source: :user
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
@@ -26,6 +26,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   before_save :set_display_name, if: -> { username.present? && display_name.blank? }
+  # before_save :optimize_profile_picture
 
   # Sets the Display Name of the User as the Capitalized version of the username
   def set_display_name
@@ -45,6 +46,18 @@ class User < ApplicationRecord
 
     profile_picture.variant(resize_to_fill: [300, 300], format: :jpeg,
                             saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 100 }).processed
+  end
+
+  def optimize_profile_picture
+    return unless profile_picture.attached?
+
+    # Generate a variant of the image with the specified transformations and optimizations
+    optimized_image = profile_picture.variant(resize_to_fill: [800, 600], format: :jpeg,
+                                              saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 90 }).processed
+
+    # Attach the optimized image to the profile_picture attachment and save it to the database
+    profile_picture.attach(io: StringIO.new(optimized_image.blob.download),
+                           filename: optimized_image.blob.filename.to_s)
   end
 
   # saver: { subsample_mode: "on", strip: true, interlace: true, quality: 80 }: This option specifies

@@ -29,11 +29,16 @@
   <%# Notifications %>
   <%= link_to notifications_path, class: "btn btn-light rounded-pill" do %>
     <li class="sidebar-item fs-4 d-flex justify-content-center align-items-center gap-2">
-      <div class="icon">
+      <div class="position-relative icon">
         <i class="bi bi-bell"></i>
+        <% if @unread_notifications %>
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+            <span class="visually-hidden">New alerts</span>
+          </span>
+        <% end %>
       </div>
       <span class="">
-        Notifications
+        Notifications       
       </span>
     </li>
   <% end %>
@@ -63,16 +68,20 @@
     Tweet
   </button>
   <%# User Dropup %>
-  <ul class="dropup w-100">
-    <button type="button" class="btn btn-light rounded-pill fs-1 d-flex justify-content-center align-items-center gap-2 w-100" data-bs-toggle="dropdown" aria-expanded="false">
+  <ul class="dropup w-100 p-0">
+    <button type="button" class="btn btn-light rounded-pill fs-1 d-flex justify-content-evenly align-items-center gap-2 w-100" data-bs-toggle="dropdown" aria-expanded="false">
       <div class="icon">
-        <i class="bi bi-person-circle"></i>
+        <% if current_user.profile_picture.attached? %>
+          <%= image_tag(current_user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
+        <% else %>
+          <i class="bi bi-person-circle"></i>
+        <% end %>
       </div>
       <div class = "fs-6 fw-lighter">
         @<%= current_user.username %>
       </div>
     </button>
-    <ul class="dropdown-menu fs-5 rounded-5 p-3">
+    <ul class="dropdown-menu fs-5 rounded-5 p-3 w-100">
       <li class="dropdown-item rounded-pill">
         <%=   link_to "Edit Profile", new_username_path, class: "nav-link"%>
       </li>

@@ -110,6 +110,10 @@ Type of notifications:
 
 ##### To do
 
-- Write public activity specs X
-- add third col to main page X
-- make a bottom bar for phone
+- Write public activity specs Done
+- add third col to main page Done
+- make a bottom bar for phone Done
+
+##### Bugs
+
+- If I create a tweet using the modal on someone else profile, turbo stream will add the tweet to their tweet list. But it will just be on the front end side.

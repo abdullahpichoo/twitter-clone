@@ -11,7 +11,7 @@
       </span>
     <% end %>
     <div class = " d-flex flex-row justify-content-evenly">
-      <%= link_to user_path(tweet.user), data: { "ignore-click": true, 'allow-user-profile-visit': true } ,class: "icon fs-1 m-2" do %>
+      <%= link_to user_path(tweet.user), data: { "ignore-click": true, 'allow-user-profile-visit': true } ,class: "icon fs-1 m-2 text-dark" do %>
         <% if tweet.user.profile_picture.attached? %>
           <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
         <% else %>

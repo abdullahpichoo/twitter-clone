@@ -15,11 +15,16 @@
       <% end %>
     </div>
     <div class="col-2 text-center">
-      <%= link_to notifications_path, class: "text-decoration-none text-dark" do %>
+      <%= link_to notifications_path, class: "text-decoration-none text-dark position-relative" do %>
         <% if controller_name == "notifications" %>
           <i class="bi bi-bell-fill"></i>
         <% else %>
           <i class="bi bi-bell"></i>
+          <% if @unread_notifications %>
+            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          <% end %>
         <% end %>
       <% end %>
     </div>

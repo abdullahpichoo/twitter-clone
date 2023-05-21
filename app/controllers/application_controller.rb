@@ -3,9 +3,18 @@ class ApplicationController < ActionController::Base
 
   before_action :set_up_username
   before_action :set_all_users
+  before_action :set_unread_notifications
 
   def set_all_users
     @all_users ||= User.all.where.not(id: current_user&.id)
+  end
+
+  def set_unread_notifications
+    return unless user_signed_in?
+
+    @unread_notifications_count ||= PublicActivity::Activity.all.where('parameters LIKE ? AND parameters LIKE ?',
+                                                                       "%recipient_id: #{current_user.id}%", '%unread: true%').count
+    @unread_notifications = @unread_notifications_count > 0
   end
 
   protected

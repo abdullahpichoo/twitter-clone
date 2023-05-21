@@ -4,7 +4,9 @@ class RetweetsController < ApplicationController
 
   def create
     @retweet = current_user.retweets.create(tweet: @tweet)
-    @retweet.create_activity key: 'retweet.create', owner: current_user, parameters: { unread: true }
+    @retweet.create_activity key: 'retweet.create', owner: current_user,
+
+                             parameters: { unread: true, recipient_id: @retweet.tweet.user.id, tweet_id: @tweet.id }
 
     respond_to do |format|
       format.html { redirect_to dashboard_path }

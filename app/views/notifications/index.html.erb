@@ -24,15 +24,7 @@
         </div>
         <% @notifications.each do |notification| %>
           <div class = "notifications border border-1 ">
-            <% if notification.trackable_type == "Like" %>
-              <%= render 'notification', type: "Like", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
-            <% elsif notification.trackable_type == "Retweet" %>
-              <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable.tweet , owner: notification.owner %>
-            <% elsif notification.trackable_type == "Following" %>
-              <%= render 'notification', type: "Following", notification: notification, tweet: notification.trackable , owner: notification.owner %>
-            <% else %>
-              <%= render 'notification', type: "Tweet", notification: notification, tweet: notification.trackable , owner: notification.owner %>
-            <% end %>
+            <%= render 'notification', notification: notification, owner: notification.owner %>
           </div>
         <% end %>
       </section>
