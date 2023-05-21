@@ -4,7 +4,11 @@ class NotificationsController < ApplicationController
 
   def index
     # Query all the public activities except the activities of the current user
-    @notifications = PublicActivity::Activity.all.where.not(owner_id: current_user.id).order(created_at: :desc)
+
+    @notifications = PublicActivity::Activity.all
+                                             .includes(:trackable, :owner)
+                                             .where.not(owner_id: current_user.id)
+                                             .order(created_at: :desc)
 
     # Marking all notifications as read
     @notifications.each do |n|

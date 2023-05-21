@@ -78,3 +78,5 @@ end
 group :test do
   gem "shoulda-matchers"
 end
+
+gem "bullet", "~> 7.0"

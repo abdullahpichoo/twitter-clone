@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_unread_notifications
 
   def set_all_users
-    @all_users ||= User.all.where.not(id: current_user&.id)
+    @all_users ||= User.all.includes(:profile_picture_attachment).where.not(id: current_user&.id)
   end
 
   def set_unread_notifications
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
     @unread_notifications_count ||= PublicActivity::Activity.all.where('parameters LIKE ? AND parameters LIKE ?',
                                                                        "%recipient_id: #{current_user.id}%", '%unread: true%').count
-    @unread_notifications = @unread_notifications_count > 0
+    @unread_notifications = @unread_notifications_count.positive?
   end
 
   protected
