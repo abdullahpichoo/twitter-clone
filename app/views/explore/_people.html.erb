@@ -1,0 +1,5 @@
+<section>
+  <% @all_users.each do |user| %>
+    <%= render 'users/follow_user_card', user: user %>
+  <% end %>
+</section>

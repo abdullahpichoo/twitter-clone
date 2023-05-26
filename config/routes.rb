@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'profile', to: 'profile#show'
   put 'profile', to: 'profile#update'
   get 'notifications', to: 'notifications#index'
+  get 'explore', to: 'explore#index'
 
   devise_for :users, controllers: {
     registrations: 'registrations'

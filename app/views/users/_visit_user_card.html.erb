@@ -22,8 +22,10 @@
         </div>
       </div>
     </div>
-    <div id = "follow-unfollow-button-explore-page" >
-      <%= render 'users/follow_unfollow_direct',  user: user %>
+    <div id = "follow-unfollow-button" >
+      <%= link_to user_path(user), class: "open-profile-icon fs-2" do %>
+        <i class="bi bi-arrow-up-right-circle-fill"></i>
+      <% end %>
     </div>
   </div>
 </div>

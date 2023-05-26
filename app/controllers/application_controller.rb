@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_unread_notifications
 
   def set_all_users
-    @all_users ||= User.all.includes(:profile_picture_attachment).where.not(id: current_user&.id)
+    @all_users ||= User.all.includes(:profile_picture_attachment).where.not(id: current_user&.id).sample(3)
   end
 
   def set_unread_notifications
