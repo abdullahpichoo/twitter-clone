@@ -77,8 +77,13 @@
           <i class="bi bi-person-circle"></i>
         <% end %>
       </div>
-      <div class = "fs-6 fw-lighter">
-        @<%= current_user.username %>
+      <div class="d-flex flex-column justify-content-center align-items-start gap-1">
+        <div class = "fs-6">
+          <%= current_user.display_name %>
+        </div>
+        <div class = "fs-6 fw-lighter">
+          @<%= current_user.username %>
+        </div>
       </div>
     </button>
     <ul class="dropdown-menu fs-5 rounded-5 p-3 w-100">
