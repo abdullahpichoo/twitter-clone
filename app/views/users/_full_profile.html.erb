@@ -32,8 +32,8 @@
           <div class="container ps-5 pe-5">
             <%# Username %>
             <div class="field mb-2">
-              <%= f.label :username, class: "fw-bold fs-5 mb-1" %><br />
-              <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+              <%= f.label "Username (without spaces)", class: "fw-bold fs-5 mb-1" %><br />
+              <%= f.text_field :username, pattern: '^\S+$', required: true, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
             </div>
             <%# Display Name %>
             <div class="field mb-2">

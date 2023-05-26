@@ -18,7 +18,8 @@ class User < ApplicationRecord
   has_many :reverse_followings, foreign_key: :following_user_id, class_name: 'Following'
   has_many :followers, through: :reverse_followings, source: :user
 
-  validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :username, uniqueness: { case_sensitive: false }, format: { with: /\A\S+\z/,
+                                                                        message: 'username cannot contain spaces' }, allow_blank: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -55,9 +56,14 @@ class User < ApplicationRecord
     optimized_image = profile_picture.variant(resize_to_fill: [800, 600], format: :jpeg,
                                               saver: { subsample_mode: 'on', strip: true, interlace: true, quality: 90 }).processed
 
+    # Generate a unique filename by concatenating the current time with the original filename
+    current_time = Time.now.strftime('%Y%m%d%H%M%S')
+    original_filename = optimized_image.blob.filename.to_s
+    new_filename = "#{current_time}_#{original_filename}"
+
     # Attach the optimized image to the profile_picture attachment and save it to the database
     profile_picture.attach(io: StringIO.new(optimized_image.blob.download),
-                           filename: optimized_image.blob.filename.to_s)
+                           filename: new_filename)
   end
 
   # saver: { subsample_mode: "on", strip: true, interlace: true, quality: 80 }: This option specifies

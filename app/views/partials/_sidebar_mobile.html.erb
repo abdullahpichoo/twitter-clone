@@ -1,17 +1,21 @@
 <ul class="sticky-top d-flex flex-column align-items-start gap-3" style= "list-style-type:none;">
   <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
-    <div class="twitter-icon fs-3">
+    <div class="twitter-icon text-primary fs-3">
       <i class="bi bi-twitter"></i>
     </div>
   <% end %>
   <%# Home %>
   <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
     <li class="sidebar-item fs-4">
-      <i class="bi bi-house-door"></i>
+      <% if controller_name == "dashboard" %>
+        <i class="bi bi-house-door-fill"></i>
+      <% else %>
+        <i class="bi bi-house-door"></i>
+      <% end %>
     </li>
   <% end %>
   <%# Explore %>
-  <%= link_to dashboard_path, class: "btn btn-light rounded-pill" do %>
+  <%= link_to explore_path, class: "btn btn-light rounded-pill" do %>
     <li class="sidebar-item fs-4 ">
       <i class="bi bi-hash"></i>
     </li>
@@ -19,11 +23,15 @@
   <%# Notifications %>
   <%= link_to notifications_path, class: "btn btn-light rounded-pill" do %>
     <li class="sidebar-item position-relative fs-4 ">
-      <i class="bi bi-bell"></i>
-      <% if @unread_notifications %>
-        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-          <span class="visually-hidden">New alerts</span>
-        </span>
+      <% if controller_name == "notifications" %>
+        <i class="bi bi-bell-fill"></i>
+      <% else %>
+        <i class="bi bi-bell"></i>
+        <% if @unread_notifications %>
+          <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+            <span class="visually-hidden">New alerts</span>
+          </span>
+        <% end %>
       <% end %>
     </li>
   <% end %>
@@ -36,7 +44,11 @@
   <%# Profile %>
   <%= link_to profile_path, class: "btn btn-light rounded-pill" do %>
     <li class="sidebar-item fs-4 ">
-      <i class="bi bi-person"></i>
+      <% if controller_name == "profile" %>
+        <i class="bi bi-person-fill"></i>
+      <% else %>
+        <i class="bi bi-person"></i>
+      <% end %>
     </li>
   <% end %>
   <%# Tweet Button %>
@@ -56,7 +68,7 @@
     </button>
     <ul class="dropdown-menu fs-5 rounded-5 p-3">
       <li class="dropdown-item rounded-pill">
-        <%= link_to "Edit Profile", new_username_path, class: "nav-link"%>
+        <%= link_to "Edit Profile", username_path(current_user), class: "nav-link"%>
       </li>
       <li class="dropdown-item rounded-pill">
         <%= link_to "Log Out", destroy_user_session_path, data: {"turbo-method": :delete}, class: "nav-link", style: "background:none; border:none;"%>

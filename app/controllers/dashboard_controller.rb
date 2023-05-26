@@ -6,6 +6,6 @@ class DashboardController < ApplicationController
     # This line eager loads all the tweets of the following_users tweets.
     # This does not show reply tweets as they are not shown on the twitter homepage.
     @all_tweets = Tweet.includes(:liked_users, :retweeted_users,
-                                 :user).where(user_id: followings).where(parent_tweet_id: nil).order(created_at: :desc)
+                                 user: :profile_picture_blob).where(user_id: followings).where(parent_tweet_id: nil).order(created_at: :desc)
   end
 end

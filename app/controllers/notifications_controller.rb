@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
     # Query all the public activities except the activities of the current user
 
     @notifications = PublicActivity::Activity.all
-                                             .includes(:trackable, :owner)
+                                             .includes(:trackable, owner: :profile_picture_blob)
                                              .where.not(owner_id: current_user.id)
                                              .order(created_at: :desc)
 

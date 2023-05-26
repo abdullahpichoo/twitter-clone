@@ -2,13 +2,13 @@
   <div class="container ps-5 pe-5">
     <%# Username %>
     <div class="field mb-2">
-      <%= f.label :username, class: "fs-5 mb-1" %><br />
-      <%= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+      <%= f.label "Username (without spaces)", class: "fs-5 mb-1" %><br />
+      <%= f.text_field :username, pattern: '^\S+$', required: true, autofocus: true,  class: "form-control form-control-lg" %>
     </div>
     <%# Display Name %>
     <div class="field mb-2">
       <%= f.label :display_name, class: "fs-5 mb-1" %><br />
-      <%= f.text_field :display_name, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+      <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name",  class: "form-control form-control-lg"  %>
     </div>
     <%# Profile Picture %>
     <%= f.label :profile_picture, class: "fs-5 mb-1" %><br />
@@ -16,8 +16,13 @@
       <%= f.file_field :profile_picture, class: "form-control form-control-lg" %>
     </div>
     <%# Submit %>
-    <div class="actions mt-4 mb-4">
+    <div class="actions mt-4 mb-2">
       <%= f.submit "Proceed", class: "btn btn-lg btn-primary w-100" %>
     </div>
+    <%# Back to Twitter %>
+    <%# These conditions make sure that the user is not a first time logger %>
+    <% if current_user.username.present? && current_user.profile_picture.attached? %>
+      <%= link_to "Back to Twitter", dashboard_path, class: "btn btn-outline-primary w-100 mb-4" %>
+    <% end %>
   </div>
 <% end %>
