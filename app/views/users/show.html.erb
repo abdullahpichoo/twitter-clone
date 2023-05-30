@@ -20,12 +20,7 @@
       </section>
     </section>
     <div class="col col-sm-auto d-none d-lg-block">
-      <section>
-        <h4 class = "border border-light-subtle mb-0 p-2 fw-bold">Who to follow</h4>
-        <% @all_users.each do |user| %>
-          <%= render 'users/visit_user_card', user: user %>
-        <% end %>
-      </section>
+      <%= render 'partials/third_col' %>
     </div>
   </div>
 </div>
