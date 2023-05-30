@@ -19,21 +19,34 @@ RSpec.describe 'Usernames', type: :request do
         expect do
           put username_path(user), params: {
             user: {
-              username: 'changed username'
+              username: 'changed_username'
             }
           }
-        end.to change { user.reload.username }.from(nil).to('changed username')
+        end.to change { user.reload.username }.from(nil).to('changed_username')
         expect(user.reload.display_name).to eq(user.username.humanize)
         expect(response).to redirect_to(dashboard_path)
       end
     end
 
-    context 'invalid username' do
+    context 'invalid username (empty username)' do
       it 'redirects back to new_username_path' do
         expect do
           put username_path(user), params: {
             user: {
               username: ''
+            }
+          }
+        end.not_to change { user.reload.username }
+        expect(response).to redirect_to(new_username_path)
+      end
+    end
+
+    context 'invalid username (username with spaces)' do
+      it 'redirects back to new_username_path' do
+        expect do
+          put username_path(user), params: {
+            user: {
+              username: 'invalid username'
             }
           }
         end.not_to change { user.reload.username }

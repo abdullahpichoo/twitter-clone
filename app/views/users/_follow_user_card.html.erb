@@ -6,7 +6,12 @@
     text-decoration: underline;
   }
 </style>
-<div class="border border-light-subtle border-top-0 p-3">
+<% if border %>
+  <% border_val = "border"%>
+<% else %>
+  <% border_val = "border-0"%>
+<% end %>
+<div class="<%= border_val %> border-light-subtle border-top-0 p-3">
   <div class="w-100 d-flex justify-content-between gap-4">
     <div class = "d-flex justify-content-between align-items-center gap-2">
       <div class="pfp">
@@ -16,7 +21,7 @@
           <%= image_tag "user-blank.png", size: "50x50" %>
         <% end %>
       </div>
-      <%= link_to user_path(user), class: "text-decoration-none text-black" do %>
+      <%= link_to user_path(user), class: "text-decoration-none text-black", data: {"turbo-frame": "_top"} do %>
         <div class="d-flex flex-column text-start">
           <div class="display-name fw-bolder">
             <%= user.display_name %>
@@ -27,8 +32,10 @@
         </div>
       <% end %>
     </div>
-    <div id = "follow-unfollow-button-explore-page" >
-      <%= render 'users/follow_unfollow_direct',  user: user %>
-    </div>
+    <% if border %>
+      <div id = "follow-unfollow-button-explore-page" >
+        <%= render 'users/follow_unfollow_direct',  user: user %>
+      </div>
+    <% end %>
   </div>
 </div>

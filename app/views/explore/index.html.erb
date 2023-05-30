@@ -12,6 +12,12 @@
   .page.active {
     display: block;
   }
+  .search-box-color{
+    background-color: rgb(239, 243, 244);
+  }
+  .z{
+    z-index: 3;
+  }
 </style>
 <div class="container">
   <div class = "row justify-content-center">
@@ -25,18 +31,33 @@
       <%= render 'partials/mobile_toolbar' %>
     </div>
     <section class="ps-0 pe-0 middle-column m-0 p-sm-2 col col-sm-auto col-md-10 col-lg-6 col-xl-5 col-xxl-6">
-      <h2 class = "w-100 d-flex text-center text-sm-start card border border-light-subtle border-top-0 rounded-0 mb-0 p-2">Explore</h2>
-      <%= content_tag(:div, "", id: "explore", data: {controller: "explore-toggler"}) do %>
-        <div class="btn-group d-flex justify-content-center" role="group">
-          <button id="tweetsBtn" type="button" class="btn btn-light border border-light-subtle border-end-0 border-top-0 rounded-0 selected fs-4">Tweets</button>
-          <button id="peopleBtn" type="button" class="btn btn-light border border-light-subtle border-start-0 border-top-0 rounded-0 fs-4">People</button>
+      <%# Search Bar %>
+      <%= render partial: 'explore/search' %>
+      <%# Search Results %>
+      <% if !params[:filter] || params[:filter] == "" %>
+        <%# If nothing is being searched then display the normal explore page %>
+        <%= content_tag(:div, "", id: "explore", data: {controller: "explore-toggler"}) do %>
+          <div class="btn-group d-flex justify-content-center z-1" role="group">
+            <button id="tweetsBtn" type="button" class="btn btn-light border border-light-subtle border-end-0 border-top-0 rounded-0 selected fs-4">Tweets</button>
+            <button id="peopleBtn" type="button" class="btn btn-light border border-light-subtle border-start-0 border-top-0 rounded-0 fs-4">People</button>
+          </div>
+          <section id="explore-tweets" class="page active">
+            <%= render partial: 'explore/explore_tweets' %>
+          </section>
+          <section id="people" class="page">
+            <%= render partial: 'explore/people' %>
+          </section>
+        <% end %>
+      <% elsif @people.length == 0 %>
+        <%# No User Found %>
+        <div class="border border-light-subtle border-top-0 rounded-0">
+          <div class="d-flex flex-column align-items-center justify-content-center p-4">
+            <div class="fs-2">
+              <i class="bi bi-x-circle"></i>
+            </div>
+            <p class= "fs-4 mb-0">User not found!</p>
+          </div>
         </div>
-        <section id="explore-tweets" class="page active">
-          <%= render partial: 'explore/explore_tweets' %>
-        </section>
-        <section id="people" class="page">
-          <%= render partial: 'explore/people' %>
-        </section>
       <% end %>
     </section>
     <div class="col col-sm-auto d-none d-lg-block">

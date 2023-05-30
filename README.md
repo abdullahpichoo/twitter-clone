@@ -117,3 +117,10 @@ Type of notifications:
 ##### Bugs
 
 - If I create a tweet using the modal on someone else profile, turbo stream will add the tweet to their tweet list. But it will just be on the front end side.
+
+##### Important Fix
+
+When I have a turbo frame tag in a page and inside the turbo frame tag, I have a link_to, when you click the link_to it will throw the content missing error. This happens because rails tries to find the same turbo_frame_tag on the next page to replace the current one and if the next page does not have a turbo_frame with the SAME tag, it will throw the Content Missing error.
+Fix:
+Thanks @marcoroth, actually bot target="\_top" and data-turbo="false" makes a full reload of the page, i did found data-turbo-frame="\_top", wich solve the problem for this case,
+--> Use data-turbo-frame="\_top" on the link_to

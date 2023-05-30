@@ -1,0 +1,33 @@
+<div class="search-border  border border-light-subtle border-top-0 rounded-0 px-4 py-3">
+  <div class="dropdown">
+    <%= form_with url: explore_path, method: :get, class: "", role: :button, ariaExpanded: :false,
+              data: {turbo_frame: "search_results", controller: "search", action: "input->search#submit", "bs-toggle": "dropdown" } do %>
+      <%=  text_field_tag "filter", nil, placeholder: "Search Twitter", autocomplete: "off",
+                class: "search-box-color rounded-pill py-2 px-4 form-control border border-light-subtle" %>
+    <% end %>
+    <%# Search Results %>
+    <ul class="dropdown-menu w-100 py-3">
+      <%= turbo_frame_tag "search_results" do %>
+        <%# If the search bar does not contain anything %>
+        <% if !params[:filter] || params[:filter] == "" %>
+          <div class="text-center">
+            <div class="text-secondary">Find people...</div>
+          </div>
+          <%# If something is typed in search bar %>
+        <% elsif params[:filter] %>
+          <%# If typed user does not exist %>
+          <% if @search_users.length == 0 %>
+            <div class="text-center">
+              <div class="text-secondary">No results found</div>
+            </div>
+            <%# If the typed user account exists %>
+          <% else %>
+            <% @search_users&.each do |user| %>
+              <%= render 'users/follow_user_card', user: user, border: false %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
