@@ -4,4 +4,6 @@ class PagesController < ApplicationController
 
     redirect_to dashboard_path
   end
+
+  
 end

@@ -1,8 +1,83 @@
-<section class = "d-flex flex-column align-items-center">
-  <h1 class="text-center">Welcome to Twitter Clone</h1>
-  <p>This clone is made entirely on Ruby on Rails and is a personal project for learning purposes</p>
-  <div class="d-flex gap-3">
-    <%= link_to "Register", new_user_registration_path, class: "btn btn-lg btn-primary"%>
-    <%= link_to "Login", new_user_session_path, class: "btn btn-lg btn-outline-primary"%>
+<style>
+  .rectangle{
+    position: absolute;
+    width: 50%;
+    height: 100vh;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    opacity: 0.9;
+  }
+  .rectangle-2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    opacity: 0.9;
+  }
+  .main-content{
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-top: 8%;
+  }
+  .main-content h1{
+    font-size: 5.5rem;
+  }
+  .main-content h3{
+    font-size: 2.5rem;
+  }
+  .logo{
+    transition:  0.2s ease;
+
+  }
+  .logo:hover{
+    transform: scale(1.1);
+    transition:  0.2s ease;
+  }
+  @media (max-width: 576px) {
+    .main-content h1{
+      font-size: 3.5rem;
+    }
+    .main-content h3{
+    font-size: 1.8rem;
+  }
+   }
+</style>
+<div class="d-flex justify-content-center align-items-center position-relative z-3 gap-4 main-content">
+  <section class= "w-100 d-flex flex-column">
+    <h1 class= "fw-bold text-center text-xl-start">
+      Welcome to my <span class="text-primary">Twitter</span> Clone!
+    </h1>
+    <h3 class="text-center text-xl-start ">
+      A personal project where I recreated a very simplified version of Twitter.
+    </h3>
+    <div class="mt-5 d-flex flex-column align-items-center justify-content-end">
+      <h3 class="">
+        Made with
+      </h3>
+      <div class="d-flex d-md-none">
+        <%= image_tag "rails_logo.png"     , size: "90x90", class: "logo"%>
+        <%= image_tag "bootstrap_logo.png" , size: "90x90", class: "logo"%>
+        <%= image_tag "postgresql_logo.png", size: "90x90", class: "logo" %>
+      </div>
+      <div class="d-flex d-none d-md-block">
+        <%= image_tag "rails_logo.png"     , size: "120x120", class: "logo"%>
+        <%= image_tag "bootstrap_logo.png" , size: "120x120", class: "logo"%>
+        <%= image_tag "postgresql_logo.png", size: "120x120", class: "logo" %>
+      </div>
+    </div>
+  </section>
+  <section class="w-100 d-none d-xl-block ms-xl-5">
+    <%= render partial: 'pages/sign_in' %>
+  </section>
+</div>
+<div class="rectangle bg-primary  d-none d-xl-block">
+</div>
+<div class="position-relative mt-4 d-flex justify-content-center align-items-center d-xl-none ">
+  <div class="rectangle-2 bg-primary">
   </div>
-</section>
+  <section class= "w-100 mt-5 mb-5">
+    <%= render partial: 'pages/sign_in' %>
+  </section>
+</div>
