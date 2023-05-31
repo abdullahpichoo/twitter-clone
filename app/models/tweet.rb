@@ -18,7 +18,8 @@ class Tweet < ApplicationRecord
                             counter_cache: :reply_tweets_count
   # inverse_of ka matlab ha I'm creating bi directional association between parent_tweet and reply_tweet
   # so that each time reply_tweet instance is created, it will have the reference to the parent_tweet model.
-  has_many :reply_tweets, class_name: 'Tweet', foreign_key: :parent_tweet_id, inverse_of: :parent_tweet
+  has_many :reply_tweets, class_name: 'Tweet', foreign_key: :parent_tweet_id, inverse_of: :parent_tweet,
+                          dependent: :destroy
 
   validates :body, presence: true, length: { maximum: 280 }
 end

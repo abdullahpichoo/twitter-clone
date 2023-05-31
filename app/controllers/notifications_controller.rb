@@ -21,15 +21,15 @@ class NotificationsController < ApplicationController
     @notifications = @notifications.select do |notification|
       case notification.key
       when 'like.create'
-        notification.trackable.tweet.user == current_user
+        notification.trackable&.tweet&.user == current_user
       when 'tweet.create'
-        current_user.following_users.include?(notification.trackable.user)
+        current_user.following_users.include?(notification.trackable&.user)
       when 'follow.create'
         true
       when 'retweet.create'
-        notification.trackable.tweet.user == current_user
+        notification.trackable&.tweet&.user == current_user
       when 'reply_tweet.create'
-        notification.trackable.parent_tweet.user == current_user
+        notification.trackable&.parent_tweet&.user == current_user
       else
         false
       end

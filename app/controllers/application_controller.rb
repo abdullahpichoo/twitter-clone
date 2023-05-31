@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
   before_action :set_up_username
-  before_action :set_all_users, once: true, prepend: true
+  before_action :set_all_users, once: true
   before_action :set_unread_notifications
 
   def set_all_users
