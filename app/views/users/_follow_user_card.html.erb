@@ -1,10 +1,13 @@
 <style>
-  .open-profile-icon{
-    color: #B0B0B0;
-  }
-  .display-name:hover, .user-username:hover {
-    text-decoration: underline;
-  }
+  /* .user-username{
+    max-width: 9rem;
+  } */
+     .open-profile-icon{
+       color: #B0B0B0;
+     }
+     .full-name:hover, .user-username:hover {
+       text-decoration: underline;
+     }
 </style>
 <% if border %>
   <% border_val = "border"%>
@@ -22,11 +25,11 @@
         <% end %>
       </div>
       <%= link_to user_path(user), class: "text-decoration-none text-black", data: {"turbo-frame": "_top"} do %>
-        <div class="d-flex flex-column text-start">
-          <div class="display-name fw-bolder">
+        <div class="d-flex flex-column text-start" >
+          <div class="full-name fw-bolder">
             <%= user.display_name %>
           </div>
-          <div class="user-username text-secondary">
+          <div class="user-username text-secondary text-truncate">
             @<%= user.username %>
           </div>
         </div>

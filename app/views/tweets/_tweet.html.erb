@@ -1,7 +1,25 @@
 <style>
-  .display-name:hover, .user-username:hover {
-    text-decoration: underline;
+  .display-name{
+     max-width: 6rem;
   }
+    .user-username{
+      max-width: 9rem;
+    }
+    .body{
+      max-width: 18rem;
+    }
+    .display-name:hover, .user-username:hover {
+      text-decoration: underline;
+    }
+    .icon-width{
+      width: 2rem;
+    }
+     @media (min-width: 992px) {
+    .body{
+      max-width: 25rem;
+    }
+
+    }
 </style>
 <%= turbo_frame_tag dom_id(tweet) do %>
   <article data-controller = "tweet-card" data-tweet-path = "<%= tweet_path(tweet) %>" data-user-path = "<%= user_path(tweet.user)%>" class="tweet border border-light-subtle border-top-0 rounded-0">
@@ -15,17 +33,20 @@
         <% if tweet.user.profile_picture.attached? %>
           <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
         <% else %>
-          <i class="bi bi-person-circle"></i>
+          <%= image_tag "user-blank.png", size: "57x57"%>
+          <%# <div class="icon-width"> %>
+          <%# <i class="bi bi-person-circle"></i> %>
+          <%# </div> %>
         <% end %>
       <% end %>
       <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
         <%# Username Info %>
-        <%= link_to user_path(tweet.user), data: { "ignore-click": true, 'allow-user-profile-visit': true }, class: "d-flex gap-2 text-decoration-none text-black" do%>
+        <%= link_to user_path(tweet.user), data: { "ignore-click": true, 'allow-user-profile-visit': true }, class: "d-flex justify-content-start gap-2 text-decoration-none text-black" do%>
           <div class="display-name fw-bold text-truncate">
             <%= tweet.user.display_name %>
           </div>
           <div class="d-flex text-secondary fw-light">
-            <div class="user-username">
+            <div class="user-username text-truncate">
               @<%= tweet.user.username %>
             </div>
             <i class="bi bi-dot"></i>

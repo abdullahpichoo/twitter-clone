@@ -10,7 +10,8 @@
     <div class="w-100 m-2">
       <%= form_with model: Tweet.new, url: submit_path, method: :post, data:{controller: "tweet-form"} do |form| %>
         <div>
-          <%= form.text_area :body, placeholder: form_placeholder, class: "form-control form-control-lg border border-light"%>
+          <%= form.text_area :body, placeholder: form_placeholder, maxlength: 280,
+                              class: "form-control form-control-lg border border-light"%>
         </div>
         <div class = "mt-2 mb-2 text-end">
           <%= form.submit submit_label, class: "btn btn-lg rounded-pill btn-primary" %>

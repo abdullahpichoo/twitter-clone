@@ -1,7 +1,13 @@
 <style>
-  .open-profile-icon{
-    color: #B0B0B0;
-  }
+  /* .display-name{
+       max-width: 6rem;
+    }
+      .user-username{
+        max-width: 9rem;
+      } */
+    .open-profile-icon{
+      color: #B0B0B0;
+    }
 </style>
 <div class="border border-light-subtle border-top-0 p-3">
   <div class="w-100 d-flex justify-content-between gap-4">
@@ -14,10 +20,10 @@
         <% end %>
       </div>
       <div class="d-flex flex-column text-start">
-        <div class="full-name fw-bolder">
+        <div class="display-name fw-bolder text-truncate">
           <%= user.display_name %>
         </div>
-        <div class="username text-secondary">
+        <div class="user-username text-secondary text-truncate" >
           @<%= user.username %>
         </div>
       </div>
