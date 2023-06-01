@@ -1,4 +1,5 @@
- <%= form_with model: current_user, local: true, url: username_path(current_user), html: {method: :put} do |f| %>
+ <%= form_with model: current_user, local: true, url: username_path(current_user), 
+      html: {method: :put}, data: {controller: "spinner", action: 'submit->spinner#show'} do |f| %>
   <div class="container ps-5 pe-5">
     <%# Username %>
     <div class="field mb-2">
@@ -17,12 +18,16 @@
     </div>
     <%# Submit %>
     <div class="actions mt-4 mb-2">
-      <%= f.submit "Proceed", class: "btn btn-lg btn-primary w-100" %>
+      <%= f.submit "Proceed", id: "submit-btn", class: "btn btn-lg btn-primary w-100" %>
+      <button id="spinner" class="btn btn-lg btn-primary w-100 d-none" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="">Please wait...</span>
+      </button>
     </div>
     <%# Back to Twitter %>
     <%# These conditions make sure that the user is not a first time logger %>
     <% if current_user.username.present? && current_user.profile_picture.attached? %>
-      <%= link_to "Back to Twitter", dashboard_path, class: "btn btn-outline-primary w-100 mb-4" %>
+      <%= link_to "Back to Twitter", dashboard_path, id:"back-to-twitter", class: "btn btn-outline-primary w-100 mb-4" %>
     <% end %>
   </div>
 <% end %>

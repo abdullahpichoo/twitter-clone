@@ -16,6 +16,9 @@ application.register("hello", HelloController)
 import SearchController from "./search_controller"
 application.register("search", SearchController)
 
+import SpinnerController from "./spinner_controller"
+application.register("spinner", SpinnerController)
+
 import TweetCardController from "./tweet_card_controller"
 application.register("tweet-card", TweetCardController)
 
