@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
 
   before_action :set_up_username
-  before_action :set_all_users, once: true
-  before_action :set_unread_notifications
+  before_action :set_all_users, once: true, if: -> { user_signed_in? }
+  before_action :set_unread_notifications, if: -> { user_signed_in? }
 
   def set_all_users
     @all_users ||= User.all.includes(:profile_picture_blob).where.not(id: current_user&.id).sample(3)
