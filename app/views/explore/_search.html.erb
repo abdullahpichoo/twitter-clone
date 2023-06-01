@@ -2,7 +2,7 @@
   <div class="dropdown">
     <%= form_with url: explore_path, method: :get, class: "", role: :button, ariaExpanded: :false,
               data: {turbo_frame: "search_results", controller: "search", action: "input->search#submit", "bs-toggle": "dropdown" } do %>
-      <%=  text_field_tag "filter", nil, placeholder: "Search Twitter", autocomplete: "off",
+      <%=  text_field_tag "filter", nil, placeholder: "Search Whisper", autocomplete: "off",
                 class: "search-box-color rounded-pill py-2 px-4 form-control border border-light-subtle" %>
     <% end %>
     <%# Search Results %>

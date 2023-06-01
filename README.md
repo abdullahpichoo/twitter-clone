@@ -1,4 +1,4 @@
-## Making a Twitter Clone on Ruby on Rails
+## Making a Whisper Clone on Ruby on Rails
 
 # Commands to Set up Live Reload
 
