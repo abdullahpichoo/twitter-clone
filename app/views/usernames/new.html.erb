@@ -1,7 +1,15 @@
-<div class="container d-flex flex-column align-items-center justify-content-center mt-5 gap-4">
-  <div class="card w-40 text-center">
-    <h2 class = "card-header mb-3">Profile Details</h2>
-    <%# Form %>
-    <%= render 'form' %>
+<style>
+  .page{
+    height: 100vh;
+    opacity: 0.9;
+  }
+</style>
+<div class="bg-primary page">
+  <div class="container d-flex flex-column align-items-center justify-content-center gap-4">
+    <div class="card w-40 text-center rounded-5 mt-5">
+      <h2 class = "card-header mb-3">Profile Details</h2>
+      <%# Form %>
+      <%= render 'form' %>
+    </div>
   </div>
 </div>

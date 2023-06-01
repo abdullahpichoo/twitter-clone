@@ -11,9 +11,9 @@
       <%= f.text_field :display_name, autofocus: true, autocomplete: "display_name",  class: "form-control form-control-lg"  %>
     </div>
     <%# Profile Picture %>
-    <%= f.label :profile_picture, class: "fs-5 mb-1" %><br />
+    <%= f.label "Profile picture (JPG JPEG PNG)", class: "fs-5 mb-1" %><br />
     <div class="input-group mb-2">
-      <%= f.file_field :profile_picture, class: "form-control form-control-lg" %>
+      <%= f.file_field :profile_picture, accept: ".jpg, .jpeg, .png", class: "form-control form-control-lg" %>
     </div>
     <%# Submit %>
     <div class="actions mt-4 mb-2">
