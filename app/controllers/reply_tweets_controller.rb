@@ -7,8 +7,6 @@ class ReplyTweetsController < ApplicationController
 
     respond_to do |format|
       if @reply_tweet.save
-        @reply_tweet.create_activity key: 'reply_tweet.create', owner: current_user,
-                                     parameters: { recipient_id: @tweet.user.id, parent_tweet_id: @tweet.id, tweet_id: @reply_tweet.id, unread: true }
         format.html { redirect_to dashboard_path }
         format.turbo_stream # This line calls the create.turbo_stream.erb file
       end
