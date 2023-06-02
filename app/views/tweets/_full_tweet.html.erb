@@ -3,6 +3,25 @@
      text-decoration: underline;
      cursor: pointer;
    }
+   .full-tweet-body{
+      max-width: 20rem;
+    }
+     @media (min-width: 992px) {
+    .full-tweet-body{
+      max-width: 30rem;
+    }
+
+    }
+  /* This is for the body of the reply tweets that will be shown */
+     .body{
+      max-width: 18rem;
+    }
+     @media (min-width: 992px) {
+    .body{
+      max-width: 25rem;
+    }
+
+    }
 </style>
 <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
   <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
@@ -32,7 +51,7 @@
     <% end %>
   </div>
   <%# @tweet Body %>
-  <p class="ms-1 fs-4 body">
+  <p class="ms-1 fs-4 full-tweet-body">
     <%= @tweet.body %>
   </p>
   <%# Posted time %>

@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
   def set_unread_notifications
     return unless user_signed_in?
 
-    @unread_notifications_count ||= PublicActivity::Activity.all.where('parameters LIKE ? AND parameters LIKE ?',
-                                                                       "%recipient_id: #{current_user.id}%", '%unread: true%').count
+    @unread_notifications_count ||= current_user.notifications.unread.count
     @unread_notifications = @unread_notifications_count.positive?
+
   end
 
   protected

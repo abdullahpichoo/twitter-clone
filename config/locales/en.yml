@@ -42,3 +42,15 @@ en:
       create: "retweeted your Tweet"
     follow:
       create: "started following you"
+
+  notifications:
+    like_notification:
+      message: "liked your Tweet"
+    retweet_notification:
+      message: "retweeted your Tweet"
+    reply_tweet_notification:
+      message: "replied to your Tweet"
+    tweet_notification:
+      message: "has Tweeted"
+    follow_notification:
+      message: "started following you"

@@ -24,8 +24,18 @@
         </div>
         <% @notifications.each do |notification| %>
           <div class = "notifications border border-1 ">
-            <%= render 'notification', notification: notification, owner: notification.owner %>
+            <%= render 'notification', 
+              created_by: notification.to_notification.creator, 
+              tweet: notification.to_notification.tweet,
+              type: notification.to_notification.type,
+              message: notification.to_notification.message
+              %>
           </div>
+          <% if false %>
+            <div class = "notifications border border-1 ">
+              <%= render 'notification', notification: notification, owner: notification.owner %>
+            </div>
+          <% end %>
         <% end %>
       </section>
     </section>

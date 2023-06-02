@@ -4,10 +4,6 @@ class FollowingsController < ApplicationController
 
   def create
     following = user.followings.create(following_params)
-
-    following.create_activity(key: 'follow.create', owner: current_user,
-                              parameters: { recipient_id: following.following_user.id, unread: true, tweet_id: nil })
-
     @followed_by = following.following_user
     respond_to do |format|
       format.html { redirect_to user_path(following.following_user) }
@@ -17,6 +13,7 @@ class FollowingsController < ApplicationController
 
   def destroy
     following = Following.find(params[:id])
+    Notification.find_by(params: { message: following })&.destroy
     following.destroy
 
     respond_to do |format|

@@ -21,8 +21,6 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params.merge(user: current_user))
     respond_to do |format|
       if @tweet.save
-        @tweet.create_activity key: 'tweet.create', owner: current_user,
-                               parameters: { unread: true, tweet_id: @tweet.id }
         format.html { redirect_to dashboard_path, notice: 'Tweet was successfully created.' }
         format.turbo_stream # This line calls the create.turbo_stream.erb file
       end

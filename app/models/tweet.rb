@@ -1,7 +1,4 @@
 class Tweet < ApplicationRecord
-  include PublicActivity::Common
-  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
-
   belongs_to :user
 
   has_many :likes, dependent: :destroy
@@ -21,5 +18,27 @@ class Tweet < ApplicationRecord
   has_many :reply_tweets, class_name: 'Tweet', foreign_key: :parent_tweet_id, inverse_of: :parent_tweet,
                           dependent: :destroy
 
+  has_noticed_notifications
+  after_create_commit :notify_recipient
+
   validates :body, presence: true, length: { maximum: 280 }
+
+  def notify_recipient
+    # Don't create notifications if you are creating it for your own tweet
+    return if user == parent_tweet&.user
+
+    if parent_tweet.present?
+      reply_tweet_notification
+    else
+      tweet_notification
+    end
+  end
+
+  def tweet_notification
+    TweetNotification.with(message: self).deliver(user.followers)
+  end
+
+  def reply_tweet_notification
+    ReplyTweetNotification.with(message: self).deliver(parent_tweet.user)
+  end
 end

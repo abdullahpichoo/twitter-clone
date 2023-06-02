@@ -124,3 +124,14 @@ When I have a turbo frame tag in a page and inside the turbo frame tag, I have a
 Fix:
 Thanks @marcoroth, actually bot target="\_top" and data-turbo="false" makes a full reload of the page, i did found data-turbo-frame="\_top", wich solve the problem for this case,
 --> Use data-turbo-frame="\_top" on the link_to
+
+## Bugs rn in Production:
+
+-> notification duplicate show ho rhi
+-> Jab koi unfollow kre, ya unlike kre, to uski sari instances delete honi chahiye
+-> tweet show page pr body ki width limit krni
+-> notification index pr tweet body ki width limit lgani
+-> content missing on clicking views
+-> search case sensitive ha
+-> followers following count dobara test krna
+-> followers following click krne pr aek dialogue box me users b dikhao jo follow kr rhe

@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_one_attached :profile_picture
 
+  has_many :notifications, as: :recipient, dependent: :destroy
+
   has_many :tweets, dependent: :destroy
 
   has_many :likes, dependent: :destroy
