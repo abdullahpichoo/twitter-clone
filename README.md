@@ -127,10 +127,10 @@ Thanks @marcoroth, actually bot target="\_top" and data-turbo="false" makes a fu
 
 ## Bugs rn in Production:
 
--> notification duplicate show ho rhi
--> Jab koi unfollow kre, ya unlike kre, to uski sari instances delete honi chahiye
--> tweet show page pr body ki width limit krni
--> notification index pr tweet body ki width limit lgani
+-> notification duplicate show ho rhi Done
+-> Jab koi unfollow kre, ya unlike kre, to uski sari instances delete honi chahiye Done
+-> tweet show page pr body ki width limit krni Done
+-> notification index pr tweet body ki width limit lgani Done
 -> content missing on clicking views
 -> search case sensitive ha
 -> followers following count dobara test krna

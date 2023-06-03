@@ -11,7 +11,7 @@ RSpec.describe 'Followings', type: :request do
         post user_followings_path(user_a), params: {
           following_user_id: user_b.id
         }
-      end.to change { Following.count && PublicActivity::Activity.count }.by(1) 
+      end.to change { Following.count && Notification.count }.by(1)
       expect(response).to redirect_to user_path(user_b)
     end
   end
@@ -21,7 +21,7 @@ RSpec.describe 'Followings', type: :request do
       following = create(:following, user: user_a, following_user: user_b)
       expect do
         delete user_following_path(user_a, following)
-      end.to change { Following.count }.by(-1)
+      end.to change { Following.count && Notification.count }.by(-1)
       expect(response).to redirect_to user_path(user_b)
     end
   end

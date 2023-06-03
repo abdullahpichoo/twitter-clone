@@ -12,7 +12,7 @@ RSpec.describe 'ReplyTweets', type: :request do
         post tweet_reply_tweets_path(parent_tweet), params: {
           tweet: { body: 'test' }
         }
-      end.to change { Tweet.count && PublicActivity::Activity.count }.by(1)
+      end.to change { Tweet.count && Notification.count }.by(1)
       expect(response).to redirect_to(dashboard_path)
     end
   end
