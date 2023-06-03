@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   resources :usernames, only: %i[new update]
   resources :users, only: [:show] do
     resources :followings, only: %i[create destroy]
+    get 'followers', to: 'users#followers'
+    get 'followings', to: 'users#followings'
   end
 end

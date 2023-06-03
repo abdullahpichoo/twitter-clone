@@ -1,0 +1,34 @@
+<style>
+  .middle-column{
+    padding-bottom: 4.5rem;
+  }
+</style>
+<div class="container">
+  <div class = "row justify-content-center">
+    <div class="col col-sm-auto col-md-auto d-none d-sm-block d-xl-none" >
+      <%= render 'partials/sidebar_mobile' %>
+    </div>
+    <div class="col col-sm-auto d-none d-xl-block" >
+      <%= render 'partials/sidebar' %>
+    </div>
+    <div class="d-block d-sm-none" >
+      <%= render 'partials/mobile_toolbar' %>
+    </div>
+    <section class="ps-0 pe-0 middle-column m-0 p-sm-2 col col-sm-auto col-md-10 col-lg-6 col-xl-5 col-xxl-6">
+      <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
+        <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
+          <i class="bi bi-arrow-left"></i>
+        <% end %>
+        <h4>Followings</h4>
+      </div>
+      <section id = "followings">
+        <% @followings.each do |f| %>
+          <%= render 'users/visit_user_card', user: f  %>
+        <% end %>
+      </section>
+    </section>
+    <div class="col col-sm-auto d-none d-lg-block">
+      <%= render 'partials/third_col' %>
+    </div>
+  </div>
+</div>
