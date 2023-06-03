@@ -35,9 +35,6 @@
           <%= image_tag(tweet.user.profile_thumbnail, size: "58x58" , class: "rounded-circle")%>
         <% else %>
           <%= image_tag "user-blank.png", size: "57x57"%>
-          <%# <div class="icon-width"> %>
-          <%# <i class="bi bi-person-circle"></i> %>
-          <%# </div> %>
         <% end %>
       <% end %>
       <div class="w-100 m-2 d-flex flex-column align-items-start gap-1">
@@ -95,14 +92,14 @@
             </div>
           <% end %>
           <%# Views %>
-          <%= link_to dashboard_path, data: {"ignore-click": true}, class: "views d-flex align-items-center gap-1 text-black text-decoration-none me-4" do %>
+          <div class = "views d-flex align-items-center gap-1 text-black text-decoration-none me-4">
             <div class="views-icon px-2 py-1 rounded-circle">
               <i class="bi bi-bar-chart-line"></i>
             </div>
             <div class="views-count fw-lighter">
               <%= tweet.views_count %>
             </div>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>
