@@ -1,10 +1,38 @@
 <%= turbo_frame_tag "follow-count" do %>
   <div class="d-flex gap-3">
-    <div class = "fw-light" >
+    <div class="fw-light followings-count" data-bs-toggle="modal" data-bs-target="#FollowingsModal">
       <b class= "fw-bold"> <%= user.followings_count %></b> Following
     </div>
-    <div class = "fw-light" >
+    <div class="fw-light followers-count" data-bs-toggle="modal" data-bs-target="#FollowersModal" >
       <b class= "fw-bold"> <%= user.followers_count %></b> Followers
     </div>
   </div>
 <% end %>
+<!-- Followers Modal -->
+<div class="modal fade" id="FollowersModal" tabindex="-1" aria-labelledby="FollowersModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h1 class="modal-title text-center fs-5" id="FollowersModalLabel">Followers</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'users/list_followers' %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Followers Modal -->
+<div class="modal fade" id="FollowingsModal" tabindex="-1" aria-labelledby="FollowingsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h1 class="modal-title text-center fs-5" id="FollowingsModalLabel">Followings</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render partial: 'users/list_followings' %>
+      </div>
+    </div>
+  </div>
+</div>

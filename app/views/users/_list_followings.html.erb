@@ -1,0 +1,8 @@
+<% followings = controller_name == "profile" ? 
+                                              current_user.following_users.includes(:profile_picture_blob) : 
+                                              User.find(params[:id]).following_users.includes(:profile_picture_blob) %>
+<section>
+  <% followings.each do |f| %>
+    <%= render 'users/visit_user_card', user: f  %>
+  <% end %>
+</section>

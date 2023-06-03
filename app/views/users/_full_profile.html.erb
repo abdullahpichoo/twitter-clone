@@ -1,3 +1,13 @@
+<style>
+  .followers-count:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  .followings-count:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+</style>
 <div class="w-100">
   <div class="d-flex align-items-center gap-3 mt-2 border border-light-subtle border-bottom-0 border-top-0 rounded-0">
     <%= link_to :back, class: "ms-3 fs-4 text-black btn btn-light rounded-circle" do %>
@@ -27,8 +37,9 @@
   <div class="modal" id="editProfileModal" tabindex="-1" aria-labelledby="regularScreenModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content p-3">
-        <button type="button" id = "profileModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close"></button>
-        <%= form_with model: current_user, url: profile_path, html: {method: :put}, data: {controller: "tweet-form"} do |f| %>
+        <button type="button" id = "profileModalCloseBtn" class="btn-close mb-2" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+        <%= form_with model: current_user, url: profile_path, html: { method: :put }, data: {controller: "tweet-form"} do |f| %>
           <div class="container ps-5 pe-5">
             <%# Username %>
             <div class="field mb-2">

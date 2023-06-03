@@ -13,6 +13,9 @@ application.register("explore-toggler", ExploreTogglerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ProfileController from "./profile_controller"
+application.register("profile", ProfileController)
+
 import SearchController from "./search_controller"
 application.register("search", SearchController)
 
