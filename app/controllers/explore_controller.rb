@@ -4,16 +4,17 @@ class ExploreController < ApplicationController
 
   # get latest tweets from 3 random users
   def index
-    users = User.all.sample(4).pluck(:id)
+    users = User.all.sample(5).pluck(:id)
     @explore_tweets = Tweet.includes(:liked_users, :retweeted_users,
                                      user: :profile_picture_blob).where(user_id: users).where(parent_tweet_id: nil).order(created_at: :desc)
-    @people = User.all.includes(:profile_picture_blob).where.not(id: current_user.id)
+
+    @people = User.all.includes(:profile_picture_blob).where.not(id: current_user.id).order(created_at: :desc)
 
     # Seach for users whose username matches the filter or display name matches the filter
     return unless params[:filter].present?
 
-    @search_users = User.all.includes(:profile_picture_blob).where('username LIKE ? OR display_name LIKE ?',
-                                                                   "%#{params[:filter]}%", "%#{params[:filter]}%")
+    @search_users = User.all.includes(:profile_picture_blob).where('LOWER(username) LIKE ? OR LOWER(display_name) LIKE ?',
+                                                                   "%#{params[:filter].downcase}%", "%#{params[:filter].downcase}%")
                         .where.not(id: current_user.id).sample(2)
   end
 

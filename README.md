@@ -131,7 +131,7 @@ Thanks @marcoroth, actually bot target="\_top" and data-turbo="false" makes a fu
 -> Jab koi unfollow kre, ya unlike kre, to uski sari instances delete honi chahiye Done
 -> tweet show page pr body ki width limit krni Done
 -> notification index pr tweet body ki width limit lgani Done
--> content missing on clicking views
--> search case sensitive ha
+-> content missing on clicking views Done
+-> search case sensitive ha Done
 -> followers following count dobara test krna
 -> followers following click krne pr aek dialogue box me users b dikhao jo follow kr rhe
