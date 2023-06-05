@@ -2,7 +2,8 @@ class TweetNotification < Noticed::Base
   deliver_by :database
 
   def tweet
-    params[:message]
+    message_json = JSON.parse(params)['message']
+    GlobalID::Locator.locate(message_json['_aj_globalid'])
   end
 
   def creator

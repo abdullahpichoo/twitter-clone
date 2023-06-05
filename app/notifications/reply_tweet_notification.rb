@@ -2,7 +2,8 @@ class ReplyTweetNotification < Noticed::Base
   deliver_by :database
 
   def reply_tweet
-    params[:message]
+    message_json = JSON.parse(params)['message']
+    GlobalID::Locator.locate(message_json['_aj_globalid'])
   end
 
   def creator
