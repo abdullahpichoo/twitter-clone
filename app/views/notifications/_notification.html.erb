@@ -37,7 +37,12 @@
         </div>
       <% end %>
     </div>
-    <span><strong><%= created_by.display_name %></strong>
+    <span>
+      <strong>
+        <%= link_to user_path(created_by), class: "text-black text-decoration-none" do %>
+          <%= created_by.display_name %>
+        <% end %>
+      </strong>
       <%= message %>
     </span>
     <% if type == 'ReplyTweet' %>
