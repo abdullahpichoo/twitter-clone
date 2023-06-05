@@ -1,10 +1,17 @@
-
 class RetweetNotification < Noticed::Base
   deliver_by :database
 
   def retweet
-    message_json = JSON.parse(params)['message']
-    GlobalID::Locator.locate(message_json['_aj_globalid'])
+    if params.is_a?(Hash)
+      # Access the attributes directly
+      message = params[:message]
+    else
+      # Handle the case where params is not a Hash (e.g., JSON string)
+      message_json = JSON.parse(params)['message']
+      message = GlobalID::Locator.locate(message_json['_aj_globalid'])
+
+    end
+    message
   end
 
   def creator
